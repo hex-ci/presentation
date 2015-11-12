@@ -16,6 +16,7 @@
 
 		<link rel="stylesheet" href="css/reveal.css">
 		<link rel="stylesheet" href="css/theme/black.css" id="theme">
+		<link rel="stylesheet" href="css/my.css">
 
 		<!-- Code syntax highlighting -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
@@ -61,44 +62,90 @@
 
 				<section>
 					<h2>组件化实践</h2>
+					<p>一个复杂网站或单页应用的实际例子</p>
+			        <p class="fragment current-visible replace none-transition">
+			        	<img height="394" data-src="image/pic-2.png" alt="">
+			        </p>
+			        <p class="fragment none-transition">
+			        	<img height="394" data-src="image/pic-3.png" alt="">
+			        </p>
+				</section>
+
+				<section>
+					<h2>组件容器</h2>
+					<p>
+						组件容器就是包含所有组件的一个页面。
+					</p>
+					<p>
+						<img height="394" data-src="image/pic-2.png" alt="">
+					</p>
+				</section>
+
+				<section>
+					<h2>Transformers 框架简介</h2>
+					<p>
+						Transformers 框架是一个以 Javascript 为控制器和视图的，彻底组件化的前端框架。
+					</p>
+					<p class="fragment">
+						<strong>解耦</strong>，<strong>解耦</strong>，<strong>解耦</strong>，重要的事情说三遍！
+					</p>
+				</section>
+
+				<section>
+					<h2>Transformers 框架特点</h2>
 					<ul>
-						<li>对复杂应用特别是单页应用的分析</li>
+						<li class="fragment">完全组件化，一个应用的所有部分均由组件组成</li>
+						<li class="fragment">以 Custom Element 的方式使用组件</li>
+						<li class="fragment">组件加载器负责加载组件的所有资源</li>
+						<li class="fragment">组件支持多级继承，框架自动管理组件依赖关系</li>
+						<li class="fragment">组件支持异步加载</li>
+						<li class="fragment">组件有 3 种通信方式</li>
+						<li class="fragment">支持组件级路由（Router）</li>
 					</ul>
 				</section>
 
 				<section>
-					<h2>Point of View</h2>
-					<p>
-						Press <strong>ESC</strong> to enter the slide overview.
-					</p>
-					<p>
-						Hold down alt and click on any element to zoom in on it using <a href="http://lab.hakim.se/zoom-js">zoom.js</a>. Alt + click anywhere to zoom back out.
-					</p>
+					<h2>以 Custom Element 的方式使用组件</h2>
+					<pre><code class="hlhtml" data-trim>
+&lt;!DOCTYPE html>
+&lt;html>
+    &lt;body>
+        &lt;aside>
+            &lt;tf:common-navigation>&lt;/tf:common-navigation>
+        &lt;/aside>
+        &lt;div>
+            &lt;tf:home-info>&lt;/tf:home-info>
+            &lt;tf:home-history>&lt;/tf:home-history>
+            &lt;tf:home-message>&lt;/tf:home-message>
+        &lt;/div>
+    &lt;/body>
+&lt;/html>
+					</code></pre>
 				</section>
 
 				<section>
-					<h2>Touch Optimized</h2>
-					<p>
-						Presentations look great on touch devices, like mobile phones and tablets. Simply swipe through your slides.
+					<h2>组件和组件的加载</h2>
+					<pre><code class="hljs" data-trim>
+// 定义名为 MyInboxMessage 的组件
+TF.define('MyInboxMessage', {
+    DomReady: function() {
+    },
+
+    // Action 是组件对外的接口
+    testAction: function(args) {
+    },
+
+    // 组件私有方法，外部无法访问
+    renderOk: function() {
+    }
+});
+					</code></pre>
+					<p class="fragment">组件名: <span class="blue">My</span><span class="red">Inbox</span><span class="green">Message</span></p>
+					<p class="fragment">
+						JS: http://domain.com/<span class="blue">my</span>/<span class="red">inbox</span>/<span class="green">message</span>.js<br>
+						HTML: http://domain.com/<span class="blue">my</span>/<span class="red">inbox</span>/<span class="green">message</span>.html<br>
+						DATA: http://domain.com/<span class="blue">my</span>/<span class="red">inbox</span>/<span class="green">message</span>.php
 					</p>
-				</section>
-
-				<section data-markdown>
-					<script type="text/template">
-						## Markdown support
-
-						Write content using inline or external Markdown.
-						Instructions and more info available in the [readme](https://github.com/hakimel/reveal.js#markdown).
-
-						```
-						<section data-markdown>
-						  ## Markdown support
-
-						  Write content using inline or external Markdown.
-						  Instructions and more info available in the [readme](https://github.com/hakimel/reveal.js#markdown).
-						</section>
-						```
-					</script>
 				</section>
 
 				<section>

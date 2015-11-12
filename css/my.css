@@ -1,0 +1,28 @@
+.reveal .slides section .fragment.current-visible.replace {
+    display: none;
+}
+.reveal .slides section .fragment.current-visible.current-fragment.replace {
+    display: block;
+}
+
+.reveal .slides section .fragment.none-transition {
+  -webkit-transform: none;
+      -ms-transform: none;
+          transform: none;
+  -webkit-transition: none;
+          transition: none;
+}
+
+p strong {
+    color: #42affa;
+}
+
+.blue {
+    color: #42affa;
+}
+.red {
+    color: #ff2c2d;
+}
+.green {
+  color: #17ff2e;
+}
