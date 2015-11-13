@@ -50,10 +50,10 @@
 						<li class="fragment">
 							Web Components
 							<ul>
-								<li>通过 Shadow DOM 封装组件的内部结构</li>
-								<li>通过 Custom Element 对外提供组件的标签</li>
-								<li>通过 Template Element 定义组件的 HTML 模板</li>
-								<li>通过 HTML imports 控制组件的加载</li>
+								<li class="fragment">通过 Shadow DOM 封装组件的内部结构</li>
+								<li class="fragment">通过 Custom Element 对外提供组件的标签</li>
+								<li class="fragment">通过 Template Element 定义组件的 HTML 模板</li>
+								<li class="fragment">通过 HTML imports 控制组件的加载</li>
 							</ul>
 						</li>
 						<li class="fragment">模块 === 组件？</li>
@@ -77,14 +77,15 @@
 						组件容器就是包含所有组件的一个页面。
 					</p>
 					<p>
-						<img height="394" data-src="image/pic-2.png" alt="">
+						<img height="387" data-src="image/pic-4.png" alt="">
 					</p>
 				</section>
 
 				<section>
 					<h2>Transformers 框架简介</h2>
 					<p>
-						Transformers 框架是一个以 Javascript 为控制器和视图的，彻底组件化的前端框架。
+						Transformers 框架是一个以 Javascript 为控制层，鼓励前端渲染的，专注组件化这一件事情的前端框架。<br>
+						<span class="fragment green">框架诞生于 2009 年</span>
 					</p>
 					<p class="fragment">
 						<strong>解耦</strong>，<strong>解耦</strong>，<strong>解耦</strong>，重要的事情说三遍！
@@ -97,16 +98,17 @@
 						<li class="fragment">完全组件化，一个应用的所有部分均由组件组成</li>
 						<li class="fragment">以 Custom Element 的方式使用组件</li>
 						<li class="fragment">组件加载器负责加载组件的所有资源</li>
+						<li class="fragment">组件有 3 种通信方式</li>
 						<li class="fragment">组件支持多级继承，框架自动管理组件依赖关系</li>
 						<li class="fragment">组件支持异步加载</li>
-						<li class="fragment">组件有 3 种通信方式</li>
+						<li class="fragment">组件支持 Namespace</li>
 						<li class="fragment">支持组件级路由（Router）</li>
 					</ul>
 				</section>
 
 				<section>
 					<h2>以 Custom Element 的方式使用组件</h2>
-					<pre><code class="hlhtml" data-trim>
+					<pre><code class="hljs html" data-trim>
 &lt;!DOCTYPE html>
 &lt;html>
     &lt;body>
@@ -140,63 +142,102 @@ TF.define('MyInboxMessage', {
     }
 });
 					</code></pre>
-					<p class="fragment">组件名: <span class="blue">My</span><span class="red">Inbox</span><span class="green">Message</span></p>
+					<p class="fragment">组件名: <span class="blue">My</span><span class="red">Inbox</span><span class="green">Message</span> (映射关系是可配置的)</p>
 					<p class="fragment">
 						JS: http://domain.com/<span class="blue">my</span>/<span class="red">inbox</span>/<span class="green">message</span>.js<br>
 						HTML: http://domain.com/<span class="blue">my</span>/<span class="red">inbox</span>/<span class="green">message</span>.html<br>
 						DATA: http://domain.com/<span class="blue">my</span>/<span class="red">inbox</span>/<span class="green">message</span>.php
 					</p>
+					<p class="fragment" style="font-size: 18px;">↑ 上面的组件名和 URL 的映射关系是可以自定义的 ↑</p>
 				</section>
 
 				<section>
-					<h2>组件的通信方式</h2>
-					<ul>
-						<li class="fragment">中介者模式</li>
-						<li class="fragment">观察者模式</li>
-						<li class="fragment">直接发送</li>
-					</ul>
+					<section>
+						<h2>组件的通信方式</h2>
+						<h3>1. 中介者模式</h3>
+						<p><img data-src="image/pic-5.gif" alt=""></p>
+					</section>
+					<section>
+						<h2>组件的通信方式</h2>
+						<h3>2. 观察者模式</h3>
+						<p><img data-src="image/pic-6.png" alt=""></p>
+					</section>
+					<section>
+						<h2>组件的通信方式</h2>
+						<h3>3. 投递消息方式</h3>
+						<ul>
+							<li class="fragment">组件拥有独立的消息处理函数</li>
+							<li class="fragment">消息分为系统消息和用户消息</li>
+							<li class="fragment">一个消息由消息名和消息参数组成</li>
+							<li class="fragment">通过组件管理器投递给目标组件</li>
+						</ul>
+					</section>
 				</section>
 
 				<section>
-					<h2>Tabular Tables</h2>
-					<table>
-						<thead>
-							<tr>
-								<th>Item</th>
-								<th>Value</th>
-								<th>Quantity</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>Apples</td>
-								<td>$1</td>
-								<td>7</td>
-							</tr>
-							<tr>
-								<td>Lemonade</td>
-								<td>$2</td>
-								<td>18</td>
-							</tr>
-							<tr>
-								<td>Bread</td>
-								<td>$3</td>
-								<td>2</td>
-							</tr>
-						</tbody>
-					</table>
+					<h2>组件多级继承</h2>
+					<pre><code class="hljs" data-trim>
+TF.define('EarthAnimal', {
+});
+
+TF.define('EarthCat', {
+    Mentor: {
+        name: 'EarthAnimal'
+    }
+});
+
+TF.define('EarthWhiteCat', {
+    Mentor: {
+        name: 'EarthCat'
+    }
+});
+					</code></pre>					
 				</section>
 
 				<section>
-					<h2>Clever Quotes</h2>
-					<p>
-						These guys come in two forms, inline: <q cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
-						&ldquo;The nice thing about standards is that there are so many to choose from&rdquo;</q> and block:
-					</p>
-					<blockquote cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
-						&ldquo;For years there has been a theory that millions of monkeys typing at random on millions of typewriters would
-						reproduce the entire works of Shakespeare. The Internet has proven this theory to be untrue.&rdquo;
-					</blockquote>
+					<h2>组件异步加载</h2>
+					<p>在使用组件的时候，如果指明异步加载，那么在组件没有被操作的时候，不会加载组件的任何资源。</p>
+					<pre class="fragment"><code class="hljs html" data-trim>
+&lt;!DOCTYPE html>
+&lt;html>
+    &lt;body>
+        &lt;aside>
+            &lt;tf:common-navigation>&lt;/tf:common-navigation>
+        &lt;/aside>
+        &lt;div>
+            &lt;tf:home-info>&lt;/tf:home-info>
+            &lt;tf:home-history async>&lt;/tf:home-history>
+            &lt;tf:home-message async>&lt;/tf:home-message>
+        &lt;/div>
+    &lt;/body>
+&lt;/html>
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>组件 Namespace</h2>
+					<p>为了方便的使用第三方开发的组件，框架提供了组件 Namespace 的功能。</p>
+					<p class="fragment current-visible replace none-transition"><img data-src="image/pic-7.jpg" alt=""></p>
+					<pre class="fragment none-transition"><code class="hljs html" data-trim>
+&lt;!DOCTYPE html>
+&lt;html>
+    &lt;body>
+        &lt;tf:google:my-inbox-message>&lt;/tf:google:my-inbox-message>
+    &lt;/body>
+&lt;/html>
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>组件级路由</h2>
+					<p>在需要记录用户操作历史的页面，可以使用组件级路由</p>
+					<p class="fragment">http://domain.com/mail#<span class="blue">my</span>-<span class="red">inbox</span>-<span class="green">message</span>/参数1/参数2.../参数n</p>
+				</section>
+
+				<section>
+					<h2>一个实际项目</h2>
+					<p>HULK 私有云项目</p>
+					<p>此项目是 360 内部私有云管理平台，使用 Transformers 框架开发，共计开发组件 <strong>400</strong> 多个，框架可以很好的管理这些组件。</p>
 				</section>
 
 				<section style="text-align: left;">
