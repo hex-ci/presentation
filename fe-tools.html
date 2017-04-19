@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>你不知道的几个前端小工具</title>
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css" id="theme">
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section class="center">
+					<h2>你不知道的几个前端小工具</h2>
+					<img height="238" data-src="images/1.png" alt="title">
+					<p>
+						<small><a href="http://codeigniter.org.cn" target="_blank">Hex</a> 为您分享 / Github: <a href="https://github.com/hex-ci" target="_blank">@hex-ci</a></small>
+					</p>
+				</section>
+
+				<section>
+					<h2>目录</h2>
+					<ul>
+						<li>前端编译工具</li>
+						<li>自动化部署工具</li>
+						<li class="fragment">附赠内容 😆</li>
+					</ul>
+				</section>
+
+				<section>
+					<h3>前端自动化编译工具</h3>
+					<p>基于 Gulp 开发，主要包括：</p>
+					<ul style="font-size: 0.9em">
+						<li style="color:#42affa">合并文件（两种合并方式）</li>
+						<li>图片压缩优化</li>
+						<li>CSS 预处理和压缩</li>
+						<li>JS 预处理和压缩</li>
+						<li>代码格式和规范检查</li>
+						<li>资源文件添加版本号</li>
+						<li>内联 JS 和 CSS 压缩</li>
+						<li style="color:#42affa">资源发布到 CDN</li>
+						<li>自动生成 SourceMap</li>
+						<li style="color:#42affa">增量编译</li>
+					</ul>
+				</section>
+
+				<section>
+					<h3>合并文件</h3>
+					<p>第一种方式</p>
+					<pre><code class="hljs">
+<!-- [javascript] -->
+&lt;script src="/static/js/a.js">&lt;/script>
+&lt;script src="/static/js/b.js">&lt;/script>
+&lt;script src="/static/js/c.js">&lt;/script>
+&lt;script src="/static/js/d.js">&lt;/script>
+<!-- [/javascript] -->
+					</code></pre>
+					<div class="fragment">
+						<p style="font-size:60%">将会生成一个合并后的文件，并替换成类似这样：</p>
+						<pre><code class="hljs">
+&lt;script src="/static/js/com_cb_xxxxxxxxx.js">&lt;/script>
+						</code></pre>
+					</div>
+				</section>
+
+				<section>
+					<h3>合并文件</h3>
+					<p>第二种方式</p>
+					<pre><code class="hljs">
+&lt;script src="/static/js/lib.js">&lt;/script>
+					</code></pre>
+					<pre><code class="hljs">
+// lib.js
+(function() {
+  var srcPath = '/static/js/';
+
+  document.write('&lt;script src="' + srcPath + 'a.js">&lt;\/script>');
+  document.write('&lt;script src="' + srcPath + 'b.js">&lt;\/script>');
+  document.write('&lt;script src="' + srcPath + 'c.js">&lt;\/script>');
+  document.write('&lt;script src="' + srcPath + 'd.js">&lt;\/script>');
+}());
+					</code></pre>
+				</section>
+
+				<section>
+					<h3>资源添加版本号</h3>
+					<pre><code class="hljs">
+&lt;script src="/static/js/demo.js">&lt;/script>
+					</code></pre>
+					<pre><code class="hljs">
+&lt;script src="/static/js/demo.js?v=cf6d21e.js">&lt;/script>
+					</code></pre>
+				</section>
+
+				<section>
+					<h3>内联压缩</h3>
+					<pre><code class="hljs">
+&lt;body>
+&lt;script type="text/javascript">
+function demo() {
+  .....
+}
+&lt;/script>
+&lt;/body>
+					</code></pre>
+					<pre><code class="hljs">
+&lt;body>
+&lt;script type="text/javascript">function demo(){.....}&lt;/script>
+&lt;/body>
+					</code></pre>
+					<small>内嵌 PHP 代码的 script 不会压缩，当然你可以通过设置 force-compress 属性来强制压缩</small>
+				</section>
+
+				<section>
+					<h3>自动发布到 CDN</h3>
+					<pre><code class="hljs">
+&lt;script src="/static/js/demo.js">&lt;/script>
+					</code></pre>
+					<pre><code class="hljs">
+&lt;script src="//cbshowhot.cdn.changbaimg.com/static/js/demo.710a2da.js">&lt;/script>
+					</code></pre>
+					<div class="fragment">
+						<p style="font-size:60%">为标签增加 nocdn 属性则不会被发布到 CDN，例如：</p>
+						<pre><code class="hljs">
+&lt;script src="/static/js/demo.js" nocdn>&lt;/script>
+						</code></pre>
+					</div>
+				</section>
+
+				<section>
+					<h3>其他工具</h3>
+					<ul>
+						<li>
+							资源生成 Data URI 并自动复制到剪贴板，例如：
+							<pre><code class="hljs">gulp datauri -f "/your/path/demo.png"</code></pre>
+							<p style="font-size:60%">下列内容会自动复制到剪贴板：</p>
+							<pre><code class="hljs">data:image/png;base64,iVBORw0KG......</code></pre>
+						</li>
+						<li class="fragment">
+							上传文件到 CDN，并生成永久唯一 URL，例如：
+							<pre><code class="hljs">gulp alioss -f "/your/path/demo.png"</code></pre>
+							<p style="font-size:60%">生成：</p>
+							<pre><code class="hljs">http://cbshowhot.cdn.changbaimg.com/-/19bb85c1291945b1/demo.png</code></pre>
+						</li>
+					</ul>
+				</section>
+
+				<section>
+					<h3>其他工具</h3>
+					<ul>
+						<li>
+							Cocos2D 资源发布到 CDN
+							<pre><code class="hljs">gulp resource</code></pre>
+							<p style="font-size:60%">生成：</p>
+							<pre><code class="hljs">http://cbshowhot.cdn.changbaimg.com/-/0c952f5370416f21/resource.js</code></pre>
+						</li>
+					</ul>
+				</section>
+
+				<section>
+					<h3>举个 🌰</h3>
+					<img style="height:12em;" data-src="images/4.png" alt="">
+				</section>
+
+				<section>
+					<h3>部署工具</h3>
+					<p style="text-align:left">问题：现有 svn up 的部署方式有一定的局限性</p>
+					<div>
+						<p style="text-align:left">解决：改为主动发布的形式</p>
+						<p style="text-align:left">主要分为四步：</p>
+						<ol>
+							<li>编译项目</li>
+							<li>打包上传到回归机（测试机）</li>
+							<li>从回归机 rsync 到线上服务器</li>
+							<li>如有问题回滚到上一版本</li>
+						</ol>
+					</div>
+				</section>
+
+				<section>
+					<h3>部署工具</h3>
+					<p>编译项目前先做文件对比</p>
+					<img data-src="images/6.png" alt="">
+				</section>
+
+				<section>
+					<h3>部署工具</h3>
+					<p>发布到回归机（测试机）</p>
+					<img data-src="images/7.png" alt="">
+					<p>如果测试有问题可以立即回滚</p>
+					<img data-src="images/8.png" alt="">
+				</section>
+
+				<section>
+					<h3>部署工具</h3>
+					<p>最后通过 rsync 同步到线上</p>
+					<img data-src="images/9.png" alt="">
+				</section>
+
+				<section>
+					<h3>让 SVN 分支用起来像 GIT 分支</h3>
+					<p>首先需要把 SVN 目录结构修改成经典分支模型</p>
+					<img data-src="images/5.png" alt="">
+				</section>
+
+				<section>
+					<h3>让 SVN 分支用起来像 GIT 分支</h3>
+					<p>然后创建类似这样的本地目录</p>
+					<pre>
+|-- root
+|
+|---- project -> ./project_trunk/
+|---- project_trunk
+|---- project_branch_name_1
+|---- project_branch_name_2
+|---- project_.....
+					</pre>
+					<small>很明显，svn trunk 要 checkout 到 project_trunk 目录下</small>
+				</section>
+
+				<section>
+					<h3>让 SVN 分支用起来像 GIT 分支</h3>
+					<p>进入 project 目录，可以自由切换分支：</p>
+					<pre><code class="hljs">sh ./project/branch_switch.sh</code></pre>
+					<img style="height:10em" data-src="images/3.png" alt="">
+				</section>
+
+				<section>
+					<h3>让 SVN 分支用起来像 GIT 分支</h3>
+					<p>进入 project 目录，可以创建分支：</p>
+					<pre><code class="hljs">sh ./project/branch_create.sh 分支名</code></pre>
+					<p>可以合并分支到主干：</p>
+					<pre><code class="hljs">sh ./project/branch_merge.sh trunk</code></pre>
+					<p>也可以 checkout 其他分支：</p>
+					<pre><code class="hljs">sh ./project/branch_checkout.sh 分支名</code></pre>
+					<p style="color:#42affa">所有操作都在 project 目录下完成</p>
+				</section>
+
+				<section style="text-align: left;">
+					<h1>THE END</h1>
+					<p>
+						- <a href="https://wiki.changba.com/pages/viewpage.action?pageId=9407798" target="_blank">直播间维护的类库 CDN 加速服务</a> <br>
+						- <a href="http://59.151.31.245:30231/" target="_blank">公司内部 NPM 仓库</a>
+					</p>
+					<p>谢谢！</p>
+				</section>
+
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: false,
+
+				transition: 'slide',
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+		</script>
+	</body>
+</html>
