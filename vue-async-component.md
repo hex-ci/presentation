@@ -6,6 +6,40 @@
 
 ## 异步组件
 
+Vue 的异步组件是把组件定义为一个工厂函数，在组件需要渲染时触发工厂函数，并且把结果缓存起来，用于后面的再次渲染。例如注册一个全局异步组件：
+
+```javascript
+Vue.component('async-demo', function(resolve, reject) {
+  setTimeout(function() {
+    // 将组件定义传入 resolve 回调函数
+    resolve({
+      template: '<div>I am async!</div>'
+      // 组件的其他选项
+    })
+  }, 1000)
+})
+```
+
+局部异步组件，也就是异步子组件和全局注册很类似：
+
+```javascript
+Vue.component('parent-demo', {
+  // 父组件的其他选项
+  components: {
+    'async-my-component': function(resolve, reject) {
+      setTimeout(function() {
+        // 将组件定义传入 resolve 回调函数
+        resolve({
+          template: '<div>I am async!</div>'
+          // 子组件的其他选项
+        })
+      }, 1000)
+    }
+  }
+})
+```
+
+
 ## 延迟加载
 
 ## 生命周期
