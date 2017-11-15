@@ -90,6 +90,31 @@ Vue.component('async-demo', function(resolve) {
 })
 ```
 
-看起来比较繁琐，如果你使用 webpack 2 及以上版本，则不建议使用第二种方式。
+看起来比较繁琐，如果你使用 webpack 2 及以上版本，则**不建议**使用第二种方式。
 
-## 生命周期
+## 生命周期控制
+
+在使用子组件（或者叫局部注册）时，我们可能需要在子组件实例化（或者叫创建完毕）后做某些事情。在非异步的子组件中，我们很容易做这件事：
+
+```html
+<template>
+  <div>
+    <my-demo ref="demo"></my-demo>
+  </div>
+</template>
+
+<script>
+import Demo from './Demo'
+
+export default {
+  mounted () {
+    // 在这里可以通过组件的 $refs 获取到子组件的实例
+    // 可以认为，在这里子组件实例化完毕
+    console.log(this.$refs.demo)
+  },
+  components: {
+    MyDemo: Demo
+  }
+}
+</script>
+```
