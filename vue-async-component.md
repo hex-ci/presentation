@@ -43,9 +43,23 @@ Vue.component('parent-demo', {
 
 这里使用 `setTimeout` 只是为了模拟异步，在实际项目中，应该配合 webpack 的代码分离功能来使用。
 
-webpack 的代码分离有两种，第一种，也是优先选择的方式是，使用符合 ECMAScript 提案的 import() 语法。第二种，则是使用 webpack 特定的 require.ensure。让我们先看看第一种：
+webpack 的代码分离有两种，第一种，也是优先选择的方式是，使用符合 ECMAScript 提案的 `import()` 语法。第二种，则是使用 webpack 特定的 `require.ensure`。让我们先看看第一种：
 
 `import() 调用使用会在内部用到 promises。如果在旧有版本浏览器中使用 import()，记得使用一个 polyfill 库（例如 es6-promise 或 promise-polyfill），来 shim Promise。`
+
+```javascript
+Vue.component(
+  'async-demo',
+  // 该 `import` 函数返回一个 `Promise` 对象。
+  () => import('./async-demo')
+)
+```
+
+上面的例子中，前文提到的工厂函数支持返回一个 Promise 实例，所以可以使用 `import()` 这种代码分离方式。
+
+本质上，`import()` 函数返回一个 Promise 实例，你可以自己定制这个过程，下文会有详细讲解。
+
+第二种 webpack 代码分离是这样的：
 
 ```javascript
 Vue.component('async-demo', function(resolve) {
@@ -54,6 +68,8 @@ Vue.component('async-demo', function(resolve) {
   })
 })
 ```
+
+看起来比较繁琐，如果你使用 webpack 2 及以上版本，则不建议使用第二种方式。
 
 ## 延迟加载
 
