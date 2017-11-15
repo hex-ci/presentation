@@ -166,3 +166,37 @@ export default {
 ```
 
 上例中，可以看到我们对组件异步加载做了一些特殊的控制，其中 `import().then()` 则是在加载完子组件的 .js 文件后，实例化子组件之前的回调，如果需要处理出错的情况，则 `import().then().catch()` 即可。
+
+以上代码只是注入了一个 `created` 函数，如果要注入其他生命周期函数，例如 `mounted`，也是类似的：
+
+```html
+<template>
+  <div>
+    <my-demo ref="demo"></my-demo>
+  </div>
+</template>
+
+<script>
+export default {
+  components: {
+    MyDemo: () => import('./Demo').then(component => {
+      component.default._Ctor = {}
+
+      if (!component.default.attached) {
+        component.default.backupMounted = component.default.mounted
+      }
+
+      component.default.mounted = function() {
+        if (component.default.backupMounted) {
+          component.default.backupMounted.call(this)
+        }
+      }
+
+      component.default.attached = true
+
+      return component
+    })
+  }
+}
+</script>
+```
