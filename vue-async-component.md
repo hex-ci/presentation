@@ -63,7 +63,7 @@ Vue.component(
 )
 ```
 
-上面的例子中，前文提到的工厂函数支持返回一个 Promise 实例，所以可以使用 `import()` 这种代码分离方式。
+上面的例子中，前文提到的工厂函数支持返回一个 Promise 对象，所以可以使用 `import()` 这种代码分离方式。
 
 局部注册也是类似的：
 
@@ -84,7 +84,9 @@ Vue.component('parent-demo', {
 Vue.component('async-demo', function(resolve) {
   require.ensure([], function(require) {
     resolve(require('./async-demo'))
-  })
+  }, function(error) {
+    // 加载出错执行这里
+  })
 })
 ```
 
