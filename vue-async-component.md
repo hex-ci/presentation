@@ -134,6 +134,9 @@ export default {
 export default {
   components: {
     MyDemo: () => import('./Demo').then(component => {
+      // 清理已缓存的组件定义
+      component.default._Ctor = {}
+
       if (!component.default.attached) {
         // 保存原组件中的 created 生命周期函数
         component.default.backupCreated = component.default.created
@@ -142,6 +145,9 @@ export default {
       // 注入一个特殊的 created 生命周期函数
       component.default.created = function() {
         // 子组件已经实例化完毕
+
+        // this 即为子组件 vm 实例
+        console.log(this)
 
         if (component.default.backupCreated) {
           // 执行原组件中的 created 生命周期函数
