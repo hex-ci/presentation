@@ -45,7 +45,7 @@ Vue.component('parent-demo', {
 
 webpack 的代码分离有两种，第一种，也是优先选择的方式是，使用符合 ECMAScript 提案的 `import()` 语法。第二种，则是使用 webpack 特定的 `require.ensure`。让我们先看看第一种：
 
-`import() 调用使用会在内部用到 promises。如果在旧有版本浏览器中使用 import()，记得使用一个 polyfill 库（例如 es6-promise 或 promise-polyfill），来 shim Promise。`
+> import() 调用使用会在内部用到 promises。如果在旧有版本浏览器中使用 import()，记得使用一个 polyfill 库（例如 es6-promise 或 promise-polyfill），来 shim Promise。
 
 ```javascript
 Vue.component(
