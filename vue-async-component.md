@@ -50,14 +50,25 @@ webpack 的代码分离有两种，第一种，也是优先选择的方式是，
 ```javascript
 Vue.component(
   'async-demo',
-  // 该 `import` 函数返回一个 `Promise` 对象。
+  // 该 import 函数返回一个 Promise 对象。
   () => import('./async-demo')
 )
 ```
 
 上面的例子中，前文提到的工厂函数支持返回一个 Promise 实例，所以可以使用 `import()` 这种代码分离方式。
 
-本质上，`import()` 函数返回一个 Promise 实例，你可以自己定制这个过程，下文会有详细讲解。
+局部注册也是类似的：
+
+```javascript
+Vue.component('parent-demo', {
+  // 父组件的其他选项
+  components: {
+    'async-demo': () => import('./async-demo')
+  }
+})
+```
+
+本质上，`import()` 函数返回一个 Promise 实例，你可以自定义这个过程，下文会有说明。
 
 第二种 webpack 代码分离是这样的：
 
