@@ -41,7 +41,9 @@ Vue.component('parent-demo', {
 
 工厂函数的第一个参数 `resolve` 为**成功后的回调**，第二个参数 `reject` 为**失败后的回调**。
 
-这里使用 `setTimeout` 只是为了模拟异步，在实际项目中，应该配合 webpack 的代码分离功能来使用。
+这里使用 `setTimeout` 只是为了模拟异步，在实际项目中，应该配合 webpack 的代码分离功能来实现延迟加载。
+
+## 延迟加载
 
 webpack 的代码分离有两种，第一种，也是优先选择的方式是，使用符合 ECMAScript 提案的 `import()` 语法。第二种，则是使用 webpack 特定的 `require.ensure`。让我们先看看第一种：
 
@@ -81,7 +83,5 @@ Vue.component('async-demo', function(resolve) {
 ```
 
 看起来比较繁琐，如果你使用 webpack 2 及以上版本，则不建议使用第二种方式。
-
-## 延迟加载
 
 ## 生命周期
