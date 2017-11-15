@@ -120,3 +120,41 @@ export default {
 ```
 
 上例中使用了 Vue 的子组件引用，所以可以在生命周期函数 `mounted` 中很方便的获取到子组件的实例，这样就可以在这个函数中处理一些子组件实例化后要做的事情。
+
+但是在异步子组件中，`mounted` 函数中是无法获取到子组件的实例的，所以我们需要一些技巧来实现这个功能。
+
+```html
+<template>
+  <div>
+    <my-demo ref="demo"></my-demo>
+  </div>
+</template>
+
+<script>
+export default {
+  components: {
+    MyDemo: () => import('./Demo').then(component => {
+      if (!component.default.attached) {
+        // 保存原组件中的 created 生命周期函数
+        component.default.backupCreated = component.default.created
+      }
+
+      // 注入一个特殊的 created 生命周期函数
+      component.default.created = function() {
+        // 子组件已经实例化完毕
+
+        if (component.default.backupCreated) {
+          // 执行原组件中的 created 生命周期函数
+          component.default.backupCreated.call(this)
+        }
+      }
+
+      // 表示已经注入过了 
+      component.default.attached = true
+
+      return component
+    })
+  }
+}
+</script>
+```
