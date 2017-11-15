@@ -107,7 +107,7 @@ Vue.component('async-demo', function(resolve) {
 import Demo from './Demo'
 
 export default {
-  mounted () {
+  mounted() {
     // 在这里可以通过组件的 $refs 获取到子组件的实例
     // 可以认为，在这里子组件实例化完毕
     console.log(this.$refs.demo)
@@ -118,3 +118,5 @@ export default {
 }
 </script>
 ```
+
+上例中使用了 Vue 的子组件引用，所以可以在生命周期函数 `mounted` 中很方便的获取到子组件的实例，这样就可以在这个函数中处理一些子组件实例化后要做的事情。
