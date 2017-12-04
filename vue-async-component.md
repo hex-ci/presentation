@@ -202,3 +202,9 @@ export default {
 ```
 
 通过上面的讨论，我们可以做到完全控制 Vue 组件的异步加载的全过程，这对于需要精确控制子组件加载的组件，会有很大的帮助。
+
+## 演示项目
+
+根据上面的思路，写了一个基于 Bootstrap 的异步弹窗演示项目：
+
+https://github.com/hex-ci/vue-async-bootstrap-modal-demo
