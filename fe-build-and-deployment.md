@@ -88,8 +88,8 @@
 │   │   │   └── img/            # 图片资源
 │   │   │   │   └── ...         #
 ├── .babelrc                    # babel 配置
-├── .eslintrc.js                # eslint config
-├── .eslintignore               # eslint ignore rules
-├── .postcssrc.js               # postcss config
-├── package.json                # build scripts and dependencies
+├── .eslintrc.js                # eslint 配置
+├── .eslintignore               # eslint 忽略规则
+├── .postcssrc.js               # postcss 配置
+├── package.json                #
 ```
