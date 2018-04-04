@@ -74,6 +74,8 @@
 
 ``` bash
 .
+├── tools/
+│   └── ...                     # main project config
 ├── src/
 │   ├── www/                    # 网站根目录(wwwroot)
 │   │   ├── index.html          # config file for eslint with extra settings only for unit tests
