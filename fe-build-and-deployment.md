@@ -72,3 +72,23 @@
 
 ### 目录结构
 
+``` bash
+.
+├── src/
+│   ├── www/                    # 网站根目录(wwwroot)
+│   │   ├── index.html          # config file for eslint with extra settings only for unit tests
+│   │   ├── static/             # module assets (processed by webpack)
+│   │   │   ├── js/             # config file for eslint with extra settings only for unit tests
+│   │   │   │   └── ...         # config file for eslint with extra settings only for unit tests
+│   │   │   ├── css/            # config file for eslint with extra settings only for unit tests
+│   │   │   │   └── ...         # config file for eslint with extra settings only for unit tests
+│   │   │   ├── img/            # config file for eslint with extra settings only for unit tests
+│   │   │   │   └── ...         # config file for eslint with extra settings only for unit tests
+├── .babelrc                    # babel config
+├── .editorconfig               # indentation, spaces/tabs and similar settings for your editor
+├── .eslintrc.js                # eslint config
+├── .eslintignore               # eslint ignore rules
+├── .gitignore                  # sensible defaults for gitignore
+├── .postcssrc.js               # postcss config
+├── package.json                # build scripts and dependencies
+```
