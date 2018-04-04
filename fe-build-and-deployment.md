@@ -8,7 +8,7 @@
 
 下面说明一下如何实现上面所列的功能。
 
-### 依赖包
+### 依赖模块
 
 例子 package.json 文件：
 ```json
@@ -68,7 +68,7 @@
 }
 ```
 
-通过在项目根目录执行 `npm install` 安装这些依赖包。
+通过在项目根目录执行 `npm install` 安装这些依赖模块。
 
 ### 目录结构
 
@@ -76,6 +76,8 @@
 .
 ├── tools/
 │   └── ...                     # 构建和部署需要的模块
+├── output/
+│   └── ...                     # 已构建的文件
 ├── src/
 │   └── www/                    # 网站根目录(wwwroot)
 │   │   ├── index.html          # 网站首页
@@ -94,4 +96,8 @@
 ├── package.json                # package.json
 ├── gulpfile.babel.js           # gulp 脚本
 ```
+
+使用 Gulp 脚本执行所有构建过程。
+
+### 合并文件
 
