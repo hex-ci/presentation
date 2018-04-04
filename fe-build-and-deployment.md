@@ -88,8 +88,10 @@
 │   │   │   └── img/            # 图片资源
 │   │   │   │   └── ...         #
 ├── .babelrc                    # babel 配置
-├── .eslintrc.js                # eslint 配置
+├── .eslintrc                   # eslint 配置
 ├── .eslintignore               # eslint 忽略规则
 ├── .postcssrc.js               # postcss 配置
-├── package.json                #
+├── package.json                # package.json
+├── gulpfile.babel.js           # gulp 脚本
 ```
+
