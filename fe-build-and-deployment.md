@@ -75,22 +75,21 @@
 ``` bash
 .
 ├── tools/
-│   └── ...                     # main project config
+│   └── ...                     # 构建和部署需要的模块
 ├── src/
-│   ├── www/                    # 网站根目录(wwwroot)
-│   │   ├── index.html          # config file for eslint with extra settings only for unit tests
-│   │   ├── static/             # module assets (processed by webpack)
-│   │   │   ├── js/             # config file for eslint with extra settings only for unit tests
-│   │   │   │   └── ...         # config file for eslint with extra settings only for unit tests
-│   │   │   ├── css/            # config file for eslint with extra settings only for unit tests
-│   │   │   │   └── ...         # config file for eslint with extra settings only for unit tests
-│   │   │   ├── img/            # config file for eslint with extra settings only for unit tests
-│   │   │   │   └── ...         # config file for eslint with extra settings only for unit tests
-├── .babelrc                    # babel config
-├── .editorconfig               # indentation, spaces/tabs and similar settings for your editor
+│   └── www/                    # 网站根目录(wwwroot)
+│   │   ├── index.html          # 网站首页
+│   │   ├── ...
+│   │   └── static/             # 资源目录
+│   │   │   └── js/             # js 资源
+│   │   │   │   └── ...         #
+│   │   │   └── css/            # css 资源
+│   │   │   │   └── ...         #
+│   │   │   └── img/            # 图片资源
+│   │   │   │   └── ...         #
+├── .babelrc                    # babel 配置
 ├── .eslintrc.js                # eslint config
 ├── .eslintignore               # eslint ignore rules
-├── .gitignore                  # sensible defaults for gitignore
 ├── .postcssrc.js               # postcss config
 ├── package.json                # build scripts and dependencies
 ```
