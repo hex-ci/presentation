@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>前端项目的开发环境与构建工具</title>
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css" id="theme">
+		<link rel="stylesheet" href="css/changba-tools.css">
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement('link');
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName('head')[0].appendChild(link);
+		</script>
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section class="center">
+					<h2>前端项目的开发环境与构建工具</h2>
+					<img height="238" data-src="images/1.png" alt="title">
+					<p>
+						<small><a href="http://codeigniter.org.cn" target="_blank">Hex</a> 为您分享 / Github: <a href="https://github.com/hex-ci" target="_blank">@hex-ci</a></small>
+					</p>
+				</section>
+
+				<section>
+					<h2>目录</h2>
+					<ul>
+						<li>开发环境</li>
+						<li>构建工具</li>
+					</ul>
+				</section>
+
+				<section>
+					<h3>开发环境要实现的功能</h3>
+					<ul>
+						<li>监听文件修改并自动刷新浏览器</li>
+						<li>支持 CSS 预处理</li>
+						<li>支持 JS 预处理</li>
+						<li>支持虚拟机开发</li>
+					</ul>
+				</section>
+
+				<section>
+					<h3>自动刷新浏览器</h3>
+					<p>
+						使用 Browsersync 实现监听文件修改、自动刷新和同步滚动。
+					</p>
+				</section>
+
+				<section>
+					<h3>CSS 和 JS 的预处理</h3>
+					<p>
+						编写了一个简单的 Express 中间件来实现实时的文件预处理。
+					</p>
+					<ul>
+						<li>
+							JS 预处理主要包括 ES6/7 转 ES5
+						</li>
+						<li>
+							CSS 预处理包括 less/scss/sass 转 css，css autoprefixer，px2rem 等。<br>（样式都写到 cdn_css 目录下，废弃 less 目录）
+						</li>
+					</ul>
+				</section>
+
+				<section>
+					<h3>px2rem</h3>
+					<p>
+						在代码中直接使用 px 单位，浏览器预览的时候会自动转换为 rem 单位。
+					</p>
+					<pre><code class="hljs css" data-trim>
+@use postcss-pxtorem;
+
+.main {
+  font-size: 22px;
+  width: 10px;
+}
+					</code></pre>
+					<p>
+						转换后
+					</p>
+					<pre><code class="hljs css" data-trim>
+.main {
+  font-size: 0.293333rem;
+  width: 0.133333rem;
+}
+					</code></pre>
+				</section>
+
+				<section>
+					<h3>Node 服务端</h3>
+					<p>
+						Node 服务端改用更流行的 nodemon 来提供服务。
+					</p>
+				</section>
+
+				<section>
+					<h3>在虚拟机上开发</h3>
+					<p>
+						在 config.js 中增加开发服务器和 Node 服务端的端口配置项
+					</p>
+					<pre><code class="hljs javascript" data-trim>
+module.exports = {
+  port: 18000,
+  serverPort: 18001,
+  hostname: 'hex.vps41.vps.changbaops.com'
+};
+					</code></pre>
+					<p class="fragment">
+						然后通过 Nginx 代理 18000 端口即可使用类似 http://hex.vps41.vps.changbaops.com/ 这样的 URL 来预览项目
+					</p>
+				</section>
+
+				<section>
+					<h3>启动开发服务器</h3>
+					<pre><code class="hljs bash" data-trim>
+$ gulp dev --name 一级目录/二级目录
+
+例如:
+
+$ gulp dev --name baofang/summer_819
+					</code></pre>
+
+				</section>
+
+				<section>
+					<h3>构建工具要实现的功能</h3>
+					<ul>
+						<li>图片压缩优化</li>
+						<li>CSS 预处理和压缩</li>
+						<li>JS 预处理和压缩</li>
+						<li>资源文件添加版本号</li>
+						<li>内联 JS 和 CSS 压缩</li>
+						<li>资源发布到 CDN</li>
+						<li>自动生成 SourceMap</li>
+						<li>增量编译</li>
+					</ul>
+				</section>
+
+				<section>
+					<h3>资源添加版本号</h3>
+					<pre><code class="hljs">
+&lt;script src="/cdn_js/baofang/summer_819/index.js">&lt;/script>
+					</code></pre>
+					<pre><code class="hljs">
+&lt;script src="/cdn_js/baofang/summer_819/index.js?v=cf6d21e.js">&lt;/script>
+					</code></pre>
+				</section>
+
+				<section>
+					<h3>自动发布到 CDN</h3>
+					<pre><code class="hljs">
+&lt;script src="/cdn_js/baofang/summer_819/index.js">&lt;/script>
+					</code></pre>
+					<pre><code class="hljs">
+&lt;script src="//cbshowhot.cdn.changbaimg.com/cdn_js/baofang/summer_819/index.710a2da.js">&lt;/script>
+					</code></pre>
+					<div class="fragment">
+						<p style="font-size:60%">为标签增加 nocdn 属性则不会被发布到 CDN，例如：</p>
+						<pre><code class="hljs">
+&lt;script src="/cdn_js/baofang/summer_819/index.js" nocdn>&lt;/script>
+						</code></pre>
+					</div>
+				</section>
+
+				<section>
+					<h3>内联压缩</h3>
+					<pre><code class="hljs">
+&lt;body>
+&lt;script type="text/javascript">
+function demo() {
+  .....
+}
+&lt;/script>
+&lt;/body>
+					</code></pre>
+					<pre><code class="hljs">
+&lt;body>
+&lt;script type="text/javascript">function demo(){.....}&lt;/script>
+&lt;/body>
+					</code></pre>
+				</section>
+
+				<section style="text-align: left;">
+					<h1>THE END</h1>
+					<p>谢谢！</p>
+				</section>
+
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: false,
+
+				transition: 'slide',
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+		</script>
+	</body>
+</html>
