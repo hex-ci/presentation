@@ -228,6 +228,181 @@
 
 				</section>
 
+				<section>
+
+					<section class="center">
+						<h2>今天</h2>
+					</section>
+
+					<section>
+						<h2>ECMAScript</h2>
+						<ul>
+							<li class="fragment">ECMAScript 是 JavaScript 的语言标准规范，后者是前者的实现</li>
+							<li class="fragment">Node.js 是 ECMAScript 在服务器端的语言实现</li>
+							<li class="fragment">ECMAScript 6 是 2015 年时正式发表的新一代版本标准，加入了许多重要的新语法与功能，令 JavaScript 向成为企业级语言迈进一大步</li>
+							<li class="fragment">目前 ES7（ES 2016）、ES8（ES 2017）也已正式发表，惯例将之统称为 ES6+，代表新时代的 JavaScript 版本</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>前端开发所面临的问题</h2>
+						<ul>
+							<li class="fragment">构建工具</li>
+							<li class="fragment">标准兼容性</li>
+							<li class="fragment">模块化与包管理</li>
+							<li class="fragment">异步处理</li>
+							<li class="fragment">大型且复杂的前端应用开发</li>
+						</ul>
+					</section>
+
+					<section class="center">
+						<h2>构建工具</h2>
+						<p>（Building Tool）</p>
+					</section>
+
+					<section>
+						<h2>Webpack</h2>
+						<ul>
+							<li class="fragment">能够对前端代码或图片、字体等内容进行一些编译、打包、压缩和一些额外的加工处理</li>
+							<li class="fragment">Webpack 取代 Gulp 与 Grunt 成为主流的最大原因
+								<ul>
+									<li>Gulp 或 Grunt 都是纯粹的工作自动化工具，并不是专为 Web 前端所设计</li>
+									<li>Webpack 是只用于 Web 前端的构建处理，为其定制了一套平台与接口，以实现系统性的配置与构建</li>
+								</ul>
+							</li>
+							<li class="fragment">Webpack 的发展为前端 SPA 提供了更强大的开发工具</li>
+						</ul>
+					</section>
+
+					<section class="center">
+						<h2>标准兼容性</h2>
+					</section>
+
+					<section>
+						<h2>ECMAScript 6+ 的问题</h2>
+						<ul>
+							<li class="fragment">各家浏览器的支持还不够完美与普遍，目前仍有部分功能未被实现完成</li>
+							<li class="fragment">某些使用者可能永远也不会更新到支持 ES6+ 的浏览器</li>
+							<li class="fragment">因此我们需要依赖工具将我们的 ES6+ 代码编译成 ES5 环境能运行的版本，让我们能放心的使用 ES6+ 语法或功能来开发</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Babel</h2>
+						<ul>
+							<li class="fragment">Babel 是目前最主流的 JavaScript 编译工具</li>
+							<li class="fragment">可以单独运行，也可以配合 Webpack 这种前端打包工具一起使用</li>
+							<li class="fragment">早期原名 6 to 5，专门处理 ES6 to ES5 的代码转换</li>
+							<li class="fragment">后来 Babel 决定平台化，除了可以使用官方维护的 ES6+ 与 React JSX 转换功能之外，也提供 API 让大家自行开发其他的转换工具</li>
+							<li class="fragment">Babel 现今已经成为 ECMAScript 标准的重要推动力量</li>
+						</ul>
+					</section>
+
+					<section class="center">
+						<h2>模块化与包管理</h2>
+					</section>
+
+					<section>
+						<h2>为什么需要模块机制？</h2>
+						<ul>
+							<li class="fragment">
+								命名冲突
+
+								<ul>
+									<li>全局命名空间下容易造成变量命名冲突，尤其是跟第三方包冲突时更难解决</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								代码间的顺序与依赖性维护困难
+
+								<ul>
+									<li>开发人员必须自行理解并解决不同 JS 文件之间，以及与第三方包的相互依赖关系</li>
+								</ul>
+							</li>
+							<li class="fragment">在大型项目中各种资源难以管理，长期积累的问题导致代码库混乱不堪</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>但是...</h2>
+						<ul>
+							<li class="fragment">JavaScript 这门语言本身长时间以来都没有设计这样的模块机制</li>
+							<li class="fragment">
+								因此社区只好自行设计并推广一些民间标准
+
+								<ul>
+									<li>AMD</li>
+									<li>CommonJS：Node.js 采用的模块规范</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								直到 ES6 里才制订了原生的模块机制规范与语法
+
+								<ul>
+									<li>融合了各家社区标准的优点，并更加先进易用</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>现状</h2>
+						<ul>
+							<li class="fragment">ES6 Module 标准本身已经定案，Google Chrome 从 61 开始支持 ES6 Module</li>
+							<li class="fragment">可以使用 Webpack 来做打包处理，以实现前端环境中模拟模块机制的效果</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>npm（Node Package Manager）</h2>
+						<ul>
+							<li class="fragment">npm 本身是 Node.js（后端）的包管理系统</li>
+							<li class="fragment">因为 Node.js 的逐渐崛起以及 npm 的普及，前端的 JS 或 CSS 代码也被放上了 npm，渐渐也成为了前端的包管理系统主流，通吃前后端</li>
+							<li class="fragment">Bower 等纯前端的包管理系统逐渐式微</li>
+							<li class="fragment">配合 Webpack 的模块机制模拟能力，可以让一些本来只能在 Node 上使用的模块也能在前端中使用</li>
+						</ul>
+					</section>
+
+					<section class="center">
+						<h2>异步处理</h2>
+					</section>
+
+					<section>
+						<h2>回调地狱</h2>
+						<ul>
+							<li class="fragment">在 JavaScript 中做异步流程处理，传统的方法是使用回调函数</li>
+							<li class="fragment">当连续性的异步回调函数一多的时候，就像是...</li>
+						</ul>
+
+						<div class="fragment">
+							<img height="350" data-src="images/web-history/4.png">
+						</div>
+					</section>
+
+					<section>
+						<h2>Promise</h2>
+						<ul>
+							<li>Promise 是一种异步一種非同步程式設計的解決方案，比傳統使用 Callback Function 的方式要更合理與強大</li>
+							<li>Promise 是一個容器，裡面保存了某個未來才會結束的事件</li>
+							<li>透過原生的 Promise API 來操作這些非同步事件的流程與資料傳遞</li>
+						</ul>
+						<div>
+							<pre><code class="hljs javascript" data-trim>
+const timeout = (delay) =&gt; new Promise((resolve, reject) =&gt; {
+  if (typeof delay == 'number') {
+    setTimeout(() =&gt; {
+      resolve(`${delay}ms passed away.`)
+    }, delay);
+  } else {
+    reject('input is a non-number value.');
+  }
+});
+							</code></pre>
+						</div>
+					</section>
+
+				</section>
+
 				<section style="text-align: left;">
 					<h1>THE END</h1>
 					<p>谢谢！</p>

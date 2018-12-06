@@ -20,8 +20,6 @@
 }
 
 .reveal .block {
-  display: block;
   position: absolute;
-  z-index: auto;
   pointer-events: none;
 }
