@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>前端工程的昨天、今天和明天</title>
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css" id="theme">
+		<link rel="stylesheet" href="css/web-history.css">
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement('link');
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName('head')[0].appendChild(link);
+		</script>
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section class="center">
+					<h2>前端工程的昨天、今天和明天</h2>
+					<p>
+						<small><a href="https://codeigniter.org.cn" target="_blank">Hex</a> 为您分享 / Github: <a href="https://github.com/hex-ci" target="_blank">@hex-ci</a></small>
+					</p>
+				</section>
+
+				<section>
+					<h2>前端的工程化</h2>
+					<ul>
+						<li class="fragment">
+							早期的年代，前端不工程
+							<ul>
+								<li>页面交互复杂度不高</li>
+								<li>设计师如果会一些基础的 HTML、CSS 的话，与程序员配合就几乎已经足以开发前端</li>
+								<li>架构简单，没有可维护性或可复用性等问题</li>
+							</ul>
+						</li>
+						<li class="fragment">
+							近些年的前端工程化需求
+							<ul>
+								<li>Web Application 的普及，伴随而来用户界面的复杂性提高，需要有组织的架构与工作流程</li>
+								<li>原有的前端技术与标准难以应付日渐增长的工程化需要</li>
+							</ul>
+						</li>
+					</ul>
+				</section>
+
+				<section>
+					<section class="center">
+						<h2>时间节点</h2>
+					</section>
+
+					<section>
+						<h2>2007 ~ 2008：百废待举</h2>
+						<ul>
+							<li class="fragment">Firefox 刚从 IE 大一统的天下瓜分掉大半领土，逼迫微软开始继续关注浏览器开发与 Web 领域</li>
+							<li class="fragment">Google Chrome 带着 V8 引擎横空出世，打响新一波的浏览器大战</li>
+							<li class="fragment">Web 标准开始继续在各家浏览器厂商的角力与争执中推动</li>
+							<li class="fragment">jQuery 开始普及，逐渐成为最热门的 JavaScript 库</li>
+							<li class="fragment">HTML5 第一份正式草案发布</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>2009 ~ 2010：寻求方向</h2>
+						<ul>
+							<li class="fragment">ECMAScript 5 发布</li>
+							<li class="fragment">微软发布 <s>世纪遗毒</s> IE 8</li>
+							<li class="fragment">Node.js 问世，原本只能运行于浏览器的 Javascript 开始能作为一门服务端语言使用</li>
+							<li class="fragment">HTML5 成为大多数人认可的 Web 未来主流技术，众多特性开始被主流浏览器所支持</li>
+							<li class="fragment">移动设备访问 Web 流量开始显著增长</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>2011 ~ 2012：移动设备的崛起</h2>
+						<ul>
+							<li class="fragment">HTML5 技术获得重大发展以及广泛地被应用，称霸十余载的 Flash 开始渐渐凋零</li>
+							<li class="fragment">Web 标准开始稳定的由各家浏览器厂商角力与协商来慢慢的持续推进，最后经过共识而产生的标准，各家浏览器也绝大部分会遵守标准来实现</li>
+							<li class="fragment">移动设备上的 Web 体验开始被重视，Responsive Web Design 概念广泛被采用，相关的前端工具如雨后春笋般冒出</li>
+							<li class="fragment">
+								前端的工程化开始被讨论与推动
+								<ul>
+									<li>社区自发推进各种模块机制</li>
+									<li>CoffeeScript 与 TypeScript 等 Transpiler 问世</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>2013 ~ 2014：工程化逐渐发展</h2>
+						<ul>
+							<li class="fragment">HTML5 正式定稿成为推荐标准</li>
+							<li class="fragment">各种 CSS 预处理器出现并被使用</li>
+							<li class="fragment">PhoneGap 这种 Hybrid Mobile App 模式被广泛应用</li>
+							<li class="fragment">ECMAScript 6 渐渐受到瞩目与发展，但还未普遍用于开发</li>
+							<li class="fragment">第一代的 SPA 开发技术成熟，如 Angular / Backbone / Ember</li>
+							<li class="fragment">新时代的前端框架 ReactJS 刚问世，前端应用的组件化开发趋势开始萌芽</li>
+							<li class="fragment">Node.js 开始大量被用于企业级应用</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>2015 ~ 2016：新时代的来临</h2>
+						<ul>
+							<li class="fragment">ES6 定稿，随着 Babel 的普及而开始极度大规模的被使用到实际开发中</li>
+							<li class="fragment">npm 与 Webpack 脱颖而出，成为前端构建工具的主流</li>
+							<li class="fragment">
+								React 相关生态系大放异彩，全面的影响并主导前端技术与社区的趋势走向
+								<ul>
+									<li>受到 React 影响并借鉴之，Angular 2、Vue 等新一代前端解决方案到来，与 React 生态系互相竞争与推动进步</li>
+									<li>React Native 这种 JS Bridge Native App 解决方案问世，Weex、NativeScript 等接踵而至</li>
+									<li>Redux 问世，将函数式编程在前端的趋势大幅拉升</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+				</section>
+
+				<section>
+
+					<section class="center">
+						<h2>昨天</h2>
+					</section>
+
+					<section class="center">
+						<h2>HTML</h2>
+					</section>
+
+					<section>
+						<h2>HTML</h2>
+						<ul>
+							<li class="fragment">
+								HTML API 分成两大部分
+								<ul>
+									<li>DOM（Document Object Model）</li>
+									<li>BOM（Browser Object Model）</li>
+								</ul>
+							</li>
+							<li class="fragment">W3C 曾经决定放弃 HTML，转而推动 XHTML</li>
+							<li class="fragment">浏览器厂商们不认同，搞小团体（WHATWG）以民间力量自行推动新一代 HTML 标准</li>
+							<li class="fragment">因为 WHATWG 的成员就是浏览器厂商，所以如果他们不愿意支持的话，W3C 强行推动什么标准也都是枉然</li>
+							<li class="fragment">最后 W3C 屈服了，接纳 WHATWG 所推动的成果，重开 HTML 工作小组，最后与浏览器厂商合力推出现在的 HTML5 标准</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>HTML5</h2>
+						<ul>
+							<li>
+								HTML5 提供了大量的新特性，其中最重要的一类是提供浏览器原生的 RIA（Rich Internet Application）能力，而不再需要 Flash 等外部插件
+								<ul>
+									<li>
+										<p>视频播放</p>
+									</li>
+									<li>
+										<p>音频播放</p>
+									</li>
+									<li>
+										<p>绘图</p>
+									</li>
+									<li>
+										<p>游戏</p>
+									</li>
+									<li>
+										<p>音视频处理</p>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section class="center">
+						<h2>jQuery</h2>
+					</section>
+
+					<section>
+						<h2>jQuery</h2>
+						<ul>
+							<li class="fragment">早期各家浏览器对于标准的制定流程没有共识，导致各浏览器的 DOM 操作或是 AJAX 等 API 都非常不一致</li>
+							<li class="fragment">
+								jQuery 带来了在当时相当先进的思想与功能
+								<ul>
+									<li>抽象化统一各家浏览器的 API 操作差异</li>
+									<li>使用 CSS Selector 来选择 DOM</li>
+									<li>链式操作的习惯</li>
+									<li>...etc</li>
+								</ul>
+							</li>
+							<li class="fragment">首个取得巨大成功与广泛应用的 JS 库</li>
+							<li class="fragment">现今已无法用于大型且复杂的前端应用开发，但仍然拥有承前启后的重要历史地位，在简单的场景中也依然可以使用</li>
+						</ul>
+					</section>
+
+					<section class="center">
+						<h2>Flash</h2>
+					</section>
+
+					<section>
+						<h2>Flash</h2>
+						<ul>
+							<li class="fragment">Flash 在那个 HTML 原生不支持 RIA 功能的年代，提供了重要的替代方案，使得 Web 能够更快速的流行于世界</li>
+							<li class="fragment">跟 jQuery 一样，在 HTML5 发达的这个年代已经逐渐被淘汰，但仍然在历史中有重要地位，完成了承前启后的历史使命</li>
+						</ul>
+						<div class="block fragment" style="min-width: 30px; min-height: 30px; width: 438px; height: 328px; left: 51px; top: 34px; z-index: 1;">
+							<img data-src="images/web-history/1.png">
+						</div>
+						<div class="block fragment" style="min-width: 30px; min-height: 30px; width: 445px; height: 436px; left: 465px; top: 67px; z-index: 2;">
+							<img data-src="images/web-history/2.png">
+						</div>
+						<div class="block fragment" style="min-width: 30px; min-height: 30px; width: 639px; height: 357px; left: 126px; top: 309px; z-index: 2;">
+							<img data-src="images/web-history/3.png">
+						</div>
+					</section>
+
+				</section>
+
+				<section style="text-align: left;">
+					<h1>THE END</h1>
+					<p>谢谢！</p>
+				</section>
+
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: false,
+
+				transition: 'slide',
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+		</script>
+	</body>
+</html>

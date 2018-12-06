@@ -1,0 +1,27 @@
+.reveal {
+  font-size: 30px;
+}
+
+.reveal h2 {
+  font-size: 1.90em;
+  line-height: 1.3;
+  font-weight: normal;
+  text-transform: initial;
+}
+
+.reveal ul {
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
+}
+
+.reveal li {
+  line-height: 1.56;
+  margin-bottom: 0.25em;
+}
+
+.reveal .block {
+  display: block;
+  position: absolute;
+  z-index: auto;
+  pointer-events: none;
+}
