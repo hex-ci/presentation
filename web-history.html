@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html>
 	<head>
 		<meta charset="utf-8">
 		<title>前端工程的昨天、今天和明天</title>
@@ -28,6 +28,7 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
+
 				<section class="center">
 					<h2>前端工程的昨天、今天和明天</h2>
 					<p>
@@ -127,11 +128,9 @@
 							</li>
 						</ul>
 					</section>
-
 				</section>
 
 				<section>
-
 					<section class="center">
 						<h2>昨天</h2>
 					</section>
@@ -225,7 +224,6 @@
 							<img data-src="images/web-history/3.png">
 						</div>
 					</section>
-
 				</section>
 
 				<section>
@@ -382,12 +380,12 @@
 					<section>
 						<h2>Promise</h2>
 						<ul>
-							<li>Promise 是一种异步一種非同步程式設計的解決方案，比傳統使用 Callback Function 的方式要更合理與強大</li>
-							<li>Promise 是一個容器，裡面保存了某個未來才會結束的事件</li>
-							<li>透過原生的 Promise API 來操作這些非同步事件的流程與資料傳遞</li>
+							<li>Promise 是一种异步程序设计的解决方案，比传统使用回调函数的方式要更合理与强大</li>
+							<li>Promise 是一个容器，里面保存了某个未来才会结束的事件</li>
+							<li>通过原生的 Promise API 来操作这些异步事件的流程与数据传输</li>
 						</ul>
 						<div>
-							<pre><code class="hljs javascript" data-trim>
+							<pre style="margin: 0 auto;"><code class="hljs javascript" data-trim>
 const timeout = (delay) =&gt; new Promise((resolve, reject) =&gt; {
   if (typeof delay == 'number') {
     setTimeout(() =&gt; {
@@ -399,13 +397,469 @@ const timeout = (delay) =&gt; new Promise((resolve, reject) =&gt; {
 });
 							</code></pre>
 						</div>
+
+						<div class="block" style="width: 455px;left: 24px;top: 510px;">
+							<pre><code class="hljs javascript" data-trim>
+timeout(3000)
+.then(value =&gt; {
+  console.log(value);
+}).catch(error =&gt; {
+  console.error(error);
+});
+// "3000ms passed away."
+							</code></pre>
+						</div>
+						<div class="block" style="width: 492px;left: 444px;top: 510px;">
+							<pre><code class="hljs javascript" data-trim>
+timeout('abc')
+.then(value =&gt; {
+  console.log(value);
+}).catch(error =&gt; {
+  console.error(error);
+});
+// "input is a non-number value."
+							</code></pre>
+						</div>
 					</section>
 
+					<section>
+						<h2>Promise</h2>
+						<ul>
+							<li>以下是结合 jQuery Ajax 的范例</li>
+						</ul>
+
+						<div>
+							<pre style="margin: 0 auto;"><code class="hljs javascript" data-trim>
+const getArticleList = () =&gt; new Promise((resolve, reject) =&gt; {
+  $.ajax({
+    url: '/api/article/list',
+    dataType: 'json',
+    success: (result) =&gt; resolve(result)
+  });
+});
+
+const getArticle = (id) =&gt; new Promise((resolve, reject) =&gt; {
+  $.ajax({
+    url: `/api/article/detail/${id}`,
+    dataType: 'json',
+    success: (result) =&gt; resolve(result)
+  });
+});
+
+const getAuthor = (id) =&gt; new Promise((resolve, reject) =&gt; {
+  $.ajax({
+    url: `/api/author/${id}`,
+    dataType: 'json',
+    success: (result) =&gt; resolve(result)
+  });
+});
+
+getArticleList()
+.then(articles =&gt; getArticle(articles[0].id))
+.then(article =&gt; getAuthor(article.authorId))
+.then(author =&gt; console.log(author))
+.catch(error =&gt; console.error(error));
+							</code></pre>
+						</div>
+					</section>
+
+					<section>
+						<h2>async / await</h2>
+						<ul>
+							<li>async 函数是基于 Promise 的扩充语法</li>
+							<li>
+								能够让 Promise 异步操作更接近同步的语意
+								<ul>
+									<li>
+										async 关键字
+										<ul>
+											<li>表示这是一个 asnyc 函数，该函数会自动变成一个会返回 promise 的函数</li>
+										</ul>
+									</li>
+									<li>
+										await 关键字
+										<ul>
+											<li>表示在此处等待这个 promise 的 resolve 或 reject 结果</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+
+						<div>
+							<pre style="margin: 0 auto;"><code class="hljs javascript" data-trim>
+const getAuthorByArticle = async() =&gt; {
+  try {
+    const articles = await getArticleList();
+    const article = await getArticle(articles[0].id);
+    const author = await getAuthor(article.authorId);
+    console.log(author);
+  } catch (error) {
+    console.error(error);
+  }
+}
+							</code></pre>
+						</div>
+					</section>
+
+					<section>
+						<h2>Fetch API</h2>
+						<ul>
+							<li>Fetch 是目标取代 XHR 的新 AJAX 技术标准，已被一些主流浏览器支持</li>
+							<li>是一个 HTML BOM 的 API，并非来自 ECMAScript 标准</li>
+							<li>Fetch 原生基于 Promise 实现，因此也可以直接结合 async / await 使用</li>
+						</ul>
+
+						<div>
+							<pre style="margin: 0 auto;"><code class="hljs javascript" data-trim>
+const getArticleList = async() =&gt; {
+  const response = await fetch('/api/article/list');
+  return await response.json();
+}
+
+const getArticle = async(id) =&gt; {
+  const response = await fetch(`/api/article/detail/${id}`);
+  return await response.json();
+}
+
+const getAuthor = async(id) =&gt; {
+  const response = await fetch(`/api/author/${id}`);
+  return await response.json();
+}
+
+try {
+  const articles = await getArticleList();
+  const article = await getArticle(articles[0].id);
+  const author = await getAuthor(article.authorId);
+  console.log(author);
+} catch (error) {
+  console.error(error);
+}
+							</code></pre>
+						</div>
+					</section>
+
+					<section class="center">
+						<h2>前端应用开发</h2>
+					</section>
+
+					<section>
+						<h2>主要趋势</h2>
+						<ul>
+							<li class="fragment">组件化开发</li>
+							<li class="fragment">Virtual DOM</li>
+							<li class="fragment">单向数据流 vs 双向数据绑定</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>组件化</h2>
+						<ul>
+							<li class="fragment">将 HTML 代码拆分为一个一个的组件模板</li>
+							<li class="fragment">方便进行抽象化以及复用</li>
+							<li class="fragment">React、Vue、Angular 2 等技术都有实现自己的组件机制，而 HTML 标准本身也在发展原生的组件系统</li>
+						</ul>
+
+						<div class="fragment">
+							<pre style="margin: 0 auto;"><code class="hljs javascript" data-trim>
+class ProductItem extends React.Component {
+  handleButtonClick = () =&gt; {
+    alert(this.props.price);
+  }
+
+  render() {
+    return (
+      &lt;div className="item"&gt;
+        &lt;div className="title"&gt;{this.props.title}&lt;/div&gt;
+        &lt;div className="price"&gt;{this.props.price}&lt;/div&gt;
+        &lt;button onClick={this.handleButtonClick}&gt;购买&lt;/button&gt;
+      &lt;/div&gt;
+    );
+  }
+}
+							</code></pre>
+						</div>
+					</section>
+
+					<section>
+						<h2>Virtual DOM</h2>
+						<ul>
+							<li class="fragment" data-fragment-index="0">在框架与浏览器 DOM 之间实现一套模拟的 DOM 中间层</li>
+							<li class="fragment" data-fragment-index="1">
+								当页面需要改变时
+
+								<ul>
+									<li>根据最新的数据重绘出新的 VDOM 树</li>
+									<li>与更改前的旧 VDOM 树进行全面的比较与计算</li>
+									<li>其中新旧差异的地方，才真的会在实际的 DOM 上发生操作改变，以此来减少不必要的实际 DOM 操作以提高性能</li>
+								</ul>
+							</li>
+						</ul>
+
+						<div class="fragment" data-fragment-index="1">
+							<img height="200" data-src="images/web-history/5.png">
+						</div>
+					</section>
+
+					<section>
+						<h2>One-way Dataflow</h2>
+						<h2>&amp; Two-way Binding</h2>
+						<ul>
+							<li class="fragment">
+								One-way Dataflow
+
+								<ul>
+									<li>数据是 UI 发生改变的唯一途径，只有数据改变时才会导致 UI 改变，并且 UI 不能直接改变数据</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Two-way Binding
+
+								<ul>
+									<li>UI 拥有直接改变特定数据的能力，自动与指定的数据做双向绑定</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>主流方案</h2>
+
+						<table>
+							<tbody>
+								<tr>
+									<th></th>
+									<th>React</th>
+									<th>Vue</th>
+									<th>Angular 2</th>
+								</tr>
+								<tr>
+									<td>类型</td>
+									<td>专注 UI</td>
+									<td>专注 UI</td>
+									<td>全能型框架</td>
+								</tr>
+								<tr>
+									<td>主导者</td>
+									<td>Facebook</td>
+									<td>个人项目</td>
+									<td>Google</td>
+								</tr>
+								<tr>
+									<td>组件化</td>
+									<td>是</td>
+									<td>是</td>
+									<td>是</td>
+								</tr>
+								<tr>
+									<td>Virtual DOM</td>
+									<td>有</td>
+									<td>有</td>
+									<td>无</td>
+								</tr>
+								<tr>
+									<td>数据流</td>
+									<td>单向</td>
+									<td>单向 / 双向</td>
+									<td>单向 / 双向</td>
+								</tr>
+								<tr>
+									<td>View 结构定义</td>
+									<td>JSX</td>
+									<td>template / JSX</td>
+									<td>template</td>
+								</tr>
+								<tr>
+									<td>学习门槛</td>
+									<td>中</td>
+									<td>低</td>
+									<td>高</td>
+								</tr>
+							</tbody>
+						</table>
+					</section>
+				</section>
+
+				<section>
+					<section class="center">
+						<h2>明天</h2>
+					</section>
+
+					<section>
+						<h2>HTTP / 2</h2>
+						<ul>
+							<li class="fragment">
+								新版的 HTTP 传输协议
+							</li>
+							<li class="fragment">
+								能够支持更好的并行加载资源
+
+								<ul>
+									<li>
+										现今将多个资源打包成少数档案的优化处理，未来可能不再是最佳实践
+									</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								主流的浏览器都已经支持
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>PWA（Progressive Web App）</h2>
+						<ul>
+							<li>
+								<p>Google 推广的一种 Web Mobile App 技术，目的是希望提高移动端网页应用的体验</p>
+
+								<ul>
+									<li>
+										<p>安装性：可以瞬间添加到主页面并且全屏幕运行，不用包成真的 App 到 Store 里下载安装</p>
+									</li>
+									<li>
+										<p>离线使用：安装时会将应用的基本架构存储在本地，以达到在断网或网络信号弱的时候依然能秒开的体验</p>
+									</li>
+									<li>
+										<p>通知：能够主动发起通知信息</p>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>JS Bridge Native App</h2>
+						<ul>
+							<li class="fragment">
+								使用 JavaScript 来开发原生的移动设备 App（Android、iOS）
+							</li>
+							<li class="fragment">
+								原理是框架包含了 JS 与原生程序的桥梁，以及 JS 代码解释引擎，以达到写 JS 代码产生原生组件的效果，并且两大平台的应用能共用大部分代码
+							</li>
+							<li class="fragment">
+								与 Web 三大前端应用方案有密切联系
+
+								<ul>
+									<li>
+										React：React Native
+									</li>
+									<li>
+										Vue：Weex
+									</li>
+									<li>
+										Angular 2：NativeScript
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>WebAssembly</h2>
+						<ul>
+							<li class="fragment">
+								各大浏览器厂商合作发展的一项技术，目的是能够将其他编程语言经过编译之后在浏览器环境中执行
+							</li>
+							<li class="fragment">
+								目前主要的用途是游戏（C++）
+							</li>
+							<li class="fragment">
+								还在发展阶段，到正式广泛应用可能还要 3 ~ 5 年的时间
+							</li>
+							<li class="fragment">
+								发展顺利并成熟的话，我们可能可以看到用多个语言皆可编写前端应用的一天
+							</li>
+						</ul>
+					</section>
+				</section>
+
+				<section>
+
+					<section class="center">
+						<h2>展望 2019</h2>
+					</section>
+
+					<section>
+						<h2>2019 前端冥灯大预测</h2>
+						<ul>
+							<li class="fragment">
+								Babel 继续担任 ECMAScript 的重要推动力量
+							</li>
+							<li class="fragment">
+								Vue 会迎来高峰，力压 Angular 2 的地位，紧逼 React
+							</li>
+							<li class="fragment">
+								Redux 依然在 State 管理的主流竞争者当中
+							</li>
+							<li class="fragment">
+								HTTP / 2 普及
+							</li>
+							<li class="fragment">
+								HTML 原生的 Web Component 依然受到冷落，但伺机而动
+							</li>
+							<li class="fragment">
+								更多前端技术与开发厂商放弃支持 IE 8，IE 9 准备上刑场
+							</li>
+						</ul>
+					</section>
+				</section>
+
+				<section>
+					<section class="center">
+						<h2>大前端時代</h2>
+					</section>
+
+					<section>
+						<h2>大前端時代</h2>
+						<ul>
+							<li class="fragment">
+								前端工程由于使用者体验的需求提高、UI 复杂度大幅增加而重要性提高
+							</li>
+							<li class="fragment">
+								各种移动设备、平台更让前端的需求广泛
+							</li>
+							<li class="fragment">
+								HTML5 的发展、Hybrid App、PWA、JS Bridge Native App 让 Web 前端工程师能有效的跨足于移动设备平台的开发
+							</li>
+							<li class="fragment">
+								前端技术发展成熟，工程化技术不断在推翻与进步
+							</li>
+							<li class="fragment">
+								对前端工程师来说，学习的能力非常重要
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>学习管道</h2>
+						<ul>
+							<li class="fragment">
+								实体书籍
+							</li>
+							<li class="fragment">
+								网络资源：文章、视频教程、线上社区、线上读书会
+							</li>
+							<li class="fragment">
+								社区活动：Conf、小型分享会、沙龙
+							</li>
+							<li class="fragment">
+								参与开源社区
+							</li>
+							<li class="fragment">
+								认识并跟其他人交流、沟通、合作
+							</li>
+						</ul>
+					</section>
 				</section>
 
 				<section style="text-align: left;">
 					<h1>THE END</h1>
 					<p>谢谢！</p>
+					<div style="position: absolute; right: 0;bottom: -400px;">
+						<small>
+							<a href="https://slides.com/tz5514/deck-1-2" target="_blank" style="color:#666">整理自 @Zet 的分享</a>
+						</small>
+					</div>
 				</section>
 
 			</div>
