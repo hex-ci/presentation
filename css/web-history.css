@@ -2,6 +2,12 @@
   font-size: 30px;
 }
 
+.reveal h1 {
+  font-size: 2.3em;
+  font-weight: normal;
+  text-transform: initial;
+}
+
 .reveal h2 {
   font-size: 1.90em;
   line-height: 1.3;

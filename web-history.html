@@ -30,7 +30,7 @@
 			<div class="slides">
 
 				<section class="center">
-					<h2>前端工程的昨天、今天和明天</h2>
+					<h1>前端工程的昨天、今天和明天</h1>
 					<p>
 						<small><a href="https://codeigniter.org.cn" target="_blank">Hex</a> 为您分享 / Github: <a href="https://github.com/hex-ci" target="_blank">@hex-ci</a></small>
 					</p>
@@ -59,7 +59,7 @@
 
 				<section>
 					<section class="center">
-						<h2>时间节点</h2>
+						<h1>时间节点</h1>
 					</section>
 
 					<section>
@@ -114,9 +114,9 @@
 					</section>
 
 					<section>
-						<h2>2015 ~ 2016：新时代的来临</h2>
+						<h2>2015 ~ 2017：新时代的来临</h2>
 						<ul>
-							<li class="fragment">ES6 定稿，随着 Babel 的普及而开始极度大规模的被使用到实际开发中</li>
+							<li class="fragment">ES6 定稿，随着 Babel 的普及而开始大规模的被使用到实际开发中</li>
 							<li class="fragment">npm 与 Webpack 脱颖而出，成为前端构建工具的主流</li>
 							<li class="fragment">
 								React 相关生态系大放异彩，全面的影响并主导前端技术与社区的趋势走向
@@ -132,7 +132,7 @@
 
 				<section>
 					<section class="center">
-						<h2>昨天</h2>
+						<h1>昨天</h1>
 					</section>
 
 					<section class="center">
@@ -229,7 +229,7 @@
 				<section>
 
 					<section class="center">
-						<h2>今天</h2>
+						<h1>今天</h1>
 					</section>
 
 					<section>
@@ -305,14 +305,12 @@
 						<ul>
 							<li class="fragment">
 								命名冲突
-
 								<ul>
 									<li>全局命名空间下容易造成变量命名冲突，尤其是跟第三方包冲突时更难解决</li>
 								</ul>
 							</li>
 							<li class="fragment">
 								代码间的顺序与依赖性维护困难
-
 								<ul>
 									<li>开发人员必须自行理解并解决不同 JS 文件之间，以及与第三方包的相互依赖关系</li>
 								</ul>
@@ -327,7 +325,6 @@
 							<li class="fragment">JavaScript 这门语言本身长时间以来都没有设计这样的模块机制</li>
 							<li class="fragment">
 								因此社区只好自行设计并推广一些民间标准
-
 								<ul>
 									<li>AMD</li>
 									<li>CommonJS：Node.js 采用的模块规范</li>
@@ -335,7 +332,6 @@
 							</li>
 							<li class="fragment">
 								直到 ES6 里才制订了原生的模块机制规范与语法
-
 								<ul>
 									<li>融合了各家社区标准的优点，并更加先进易用</li>
 								</ul>
@@ -587,7 +583,6 @@ class ProductItem extends React.Component {
 							<li class="fragment" data-fragment-index="0">在框架与浏览器 DOM 之间实现一套模拟的 DOM 中间层</li>
 							<li class="fragment" data-fragment-index="1">
 								当页面需要改变时
-
 								<ul>
 									<li>根据最新的数据重绘出新的 VDOM 树</li>
 									<li>与更改前的旧 VDOM 树进行全面的比较与计算</li>
@@ -607,14 +602,12 @@ class ProductItem extends React.Component {
 						<ul>
 							<li class="fragment">
 								One-way Dataflow
-
 								<ul>
 									<li>数据是 UI 发生改变的唯一途径，只有数据改变时才会导致 UI 改变，并且 UI 不能直接改变数据</li>
 								</ul>
 							</li>
 							<li class="fragment">
 								Two-way Binding
-
 								<ul>
 									<li>UI 拥有直接改变特定数据的能力，自动与指定的数据做双向绑定</li>
 								</ul>
@@ -682,27 +675,20 @@ class ProductItem extends React.Component {
 
 				<section>
 					<section class="center">
-						<h2>明天</h2>
+						<h1>明天</h1>
 					</section>
 
 					<section>
 						<h2>HTTP / 2</h2>
 						<ul>
-							<li class="fragment">
-								新版的 HTTP 传输协议
-							</li>
+							<li class="fragment">新版的 HTTP 传输协议</li>
 							<li class="fragment">
 								能够支持更好的并行加载资源
-
 								<ul>
-									<li>
-										现今将多个资源打包成少数档案的优化处理，未来可能不再是最佳实践
-									</li>
+									<li>现今将多个资源打包成少数档案的优化处理，未来可能不再是最佳实践</li>
 								</ul>
 							</li>
-							<li class="fragment">
-								主流的浏览器都已经支持
-							</li>
+							<li class="fragment">主流的浏览器都已经支持</li>
 						</ul>
 					</section>
 
@@ -710,18 +696,11 @@ class ProductItem extends React.Component {
 						<h2>PWA（Progressive Web App）</h2>
 						<ul>
 							<li>
-								<p>Google 推广的一种 Web Mobile App 技术，目的是希望提高移动端网页应用的体验</p>
-
+								Google 推广的一种 Web Mobile App 技术，目的是希望提高移动端网页应用的体验
 								<ul>
-									<li>
-										<p>安装性：可以瞬间添加到主页面并且全屏幕运行，不用包成真的 App 到 Store 里下载安装</p>
-									</li>
-									<li>
-										<p>离线使用：安装时会将应用的基本架构存储在本地，以达到在断网或网络信号弱的时候依然能秒开的体验</p>
-									</li>
-									<li>
-										<p>通知：能够主动发起通知信息</p>
-									</li>
+									<li>安装性：可以瞬间添加到主页面并且全屏幕运行，不用包成真的 App 到 Store 里下载安装</li>
+									<li>离线使用：安装时会将应用的基本架构存储在本地，以达到在断网或网络信号弱的时候依然能秒开的体验</li>
+									<li>通知：能够主动发起通知信息</li>
 								</ul>
 							</li>
 						</ul>
@@ -730,25 +709,14 @@ class ProductItem extends React.Component {
 					<section>
 						<h2>JS Bridge Native App</h2>
 						<ul>
-							<li class="fragment">
-								使用 JavaScript 来开发原生的移动设备 App（Android、iOS）
-							</li>
-							<li class="fragment">
-								原理是框架包含了 JS 与原生程序的桥梁，以及 JS 代码解释引擎，以达到写 JS 代码产生原生组件的效果，并且两大平台的应用能共用大部分代码
-							</li>
+							<li class="fragment">使用 JavaScript 来开发原生的移动设备 App（Android、iOS）</li>
+							<li class="fragment">原理是框架包含了 JS 与原生程序的桥梁，以及 JS 代码解释引擎，以达到写 JS 代码产生原生组件的效果，并且两大平台的应用能共用大部分代码</li>
 							<li class="fragment">
 								与 Web 三大前端应用方案有密切联系
-
 								<ul>
-									<li>
-										React：React Native
-									</li>
-									<li>
-										Vue：Weex
-									</li>
-									<li>
-										Angular 2：NativeScript
-									</li>
+									<li>React：React Native</li>
+									<li>Vue：Weex</li>
+									<li>Angular 2：NativeScript</li>
 								</ul>
 							</li>
 						</ul>
@@ -757,97 +725,56 @@ class ProductItem extends React.Component {
 					<section>
 						<h2>WebAssembly</h2>
 						<ul>
-							<li class="fragment">
-								各大浏览器厂商合作发展的一项技术，目的是能够将其他编程语言经过编译之后在浏览器环境中执行
-							</li>
-							<li class="fragment">
-								目前主要的用途是游戏（C++）
-							</li>
-							<li class="fragment">
-								还在发展阶段，到正式广泛应用可能还要 3 ~ 5 年的时间
-							</li>
-							<li class="fragment">
-								发展顺利并成熟的话，我们可能可以看到用多个语言皆可编写前端应用的一天
-							</li>
+							<li class="fragment">各大浏览器厂商合作发展的一项技术，目的是能够将其他编程语言经过编译之后在浏览器环境中执行</li>
+							<li class="fragment">目前主要的用途是游戏（C++）</li>
+							<li class="fragment">还在发展阶段，到正式广泛应用可能还要 3 ~ 5 年的时间</li>
+							<li class="fragment">发展顺利并成熟的话，我们可能可以看到用多个语言皆可编写前端应用的一天</li>
 						</ul>
 					</section>
 				</section>
 
 				<section>
-
 					<section class="center">
-						<h2>展望 2019</h2>
+						<h1>展望 2019</h1>
 					</section>
 
 					<section>
 						<h2>2019 前端冥灯大预测</h2>
 						<ul>
-							<li class="fragment">
-								Babel 继续担任 ECMAScript 的重要推动力量
-							</li>
-							<li class="fragment">
-								Vue 会迎来高峰，力压 Angular 2 的地位，紧逼 React
-							</li>
-							<li class="fragment">
-								Redux 依然在 State 管理的主流竞争者当中
-							</li>
-							<li class="fragment">
-								HTTP / 2 普及
-							</li>
-							<li class="fragment">
-								HTML 原生的 Web Component 依然受到冷落，但伺机而动
-							</li>
-							<li class="fragment">
-								更多前端技术与开发厂商放弃支持 IE 8，IE 9 准备上刑场
-							</li>
+							<li class="fragment">Babel 继续担任 ECMAScript 的重要推动力量</li>
+							<li class="fragment">Vue 会迎来高峰，力压 Angular 2 的地位，紧逼 React</li>
+							<li class="fragment">Redux 依然在 State 管理的主流竞争者当中</li>
+							<li class="fragment">HTTP / 2 普及</li>
+							<li class="fragment">HTML 原生的 Web Component 依然受到冷落，但伺机而动</li>
+							<li class="fragment">更多前端技术与开发厂商放弃支持 IE 8，IE 9 准备上刑场</li>
 						</ul>
 					</section>
 				</section>
 
 				<section>
 					<section class="center">
-						<h2>大前端時代</h2>
+						<h1>大前端時代</h1>
 					</section>
 
 					<section>
 						<h2>大前端時代</h2>
 						<ul>
-							<li class="fragment">
-								前端工程由于使用者体验的需求提高、UI 复杂度大幅增加而重要性提高
-							</li>
-							<li class="fragment">
-								各种移动设备、平台更让前端的需求广泛
-							</li>
-							<li class="fragment">
-								HTML5 的发展、Hybrid App、PWA、JS Bridge Native App 让 Web 前端工程师能有效的跨足于移动设备平台的开发
-							</li>
-							<li class="fragment">
-								前端技术发展成熟，工程化技术不断在推翻与进步
-							</li>
-							<li class="fragment">
-								对前端工程师来说，学习的能力非常重要
-							</li>
+							<li class="fragment">前端工程由于使用者体验的需求提高、UI 复杂度大幅增加而重要性提高</li>
+							<li class="fragment">各种移动设备、平台更让前端的需求广泛</li>
+							<li class="fragment">HTML5 的发展、Hybrid App、PWA、JS Bridge Native App 让 Web 前端工程师能有效的跨足于移动设备平台的开发</li>
+							<li class="fragment">前端技术发展成熟，工程化技术不断在推翻与进步</li>
+							<li class="fragment">对前端工程师来说，学习的能力非常重要</li>
 						</ul>
 					</section>
 
 					<section>
-						<h2>学习管道</h2>
+						<h2>学习渠道</h2>
 						<ul>
-							<li class="fragment">
-								实体书籍
-							</li>
-							<li class="fragment">
-								网络资源：文章、视频教程、线上社区、线上读书会
-							</li>
-							<li class="fragment">
-								社区活动：Conf、小型分享会、沙龙
-							</li>
-							<li class="fragment">
-								参与开源社区
-							</li>
-							<li class="fragment">
-								认识并跟其他人交流、沟通、合作
-							</li>
+							<li class="fragment">实体书籍</li>
+							<li class="fragment">网络资源：文章、视频教程、线上社区、线上读书会</li>
+							<li class="fragment">社区活动：Conf、小型分享会、沙龙</li>
+							<li class="fragment">参与开源社区</li>
+							<li class="fragment">认识并跟其他人交流、沟通、合作</li>
 						</ul>
 					</section>
 				</section>
