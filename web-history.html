@@ -383,9 +383,9 @@
 						<div>
 							<pre style="margin: 0 auto;"><code class="hljs javascript" data-trim>
 const timeout = (delay) =&gt; new Promise((resolve, reject) =&gt; {
-  if (typeof delay == 'number') {
+  if (typeof delay === 'number') {
     setTimeout(() =&gt; {
-      resolve(`${delay}ms passed away.`)
+      resolve(`${delay}ms passed away.`);
     }, delay);
   } else {
     reject('input is a non-number value.');
