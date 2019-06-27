@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Babel 插件开发入门</title>
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/black.css" id="theme">
+    <link rel="stylesheet" href="css/default.css">
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section class="center">
+          <h2>Babel 插件开发入门</h2>
+          <p>
+            <small><a href="https://codeigniter.org.cn" target="_blank">Hex</a> 为您分享 / Github: <a href="https://github.com/hex-ci" target="_blank">@hex-ci</a></small>
+          </p>
+        </section>
+
+        <section>
+          <h2>目录</h2>
+          <ul>
+            <li>什么是 Babel？</li>
+            <li>抽象语法树（AST）</li>
+            <li>
+              Babel 的处理步骤
+              <ul>
+                <li>解析（parse）</li>
+                <li>转换（transform）</li>
+                <li>生成（generate）</li>
+              </ul>
+            </li>
+            <li>插件典型结构</li>
+            <li>实例</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>什么是 Babel？</h3>
+          <p class="normal">
+            Babel 是 JavaScript 编译器，更确切地说是源码到源码的编译器，通常也叫做“转译器（transpiler）”。意思是说你为 Babel 提供一些 JavaScript 代码，Babel 更改这些代码，然后返回给你新生成的代码。
+          </p>
+        </section>
+
+        <section>
+          <h3>抽象语法树（AST）</h3>
+          <p>
+            Babel 处理过程中的每一步都涉及到创建或是操作抽象语法树，亦称 AST。
+          </p>
+          <div class="fragment">
+            <p>例如：</p>
+            <pre class=""><code class="hljs javascript" data-trim>
+  function square(n) {
+    return n * n;
+  }
+            </code></pre>
+          </div>
+        </section>
+
+        <section>
+          <h3>抽象语法树（AST）</h3>
+          <p>会转换成：</p>
+          <pre class=""><code class="hljs javascript" data-trim>
+{
+  type: "FunctionDeclaration",
+  id: {
+    type: "Identifier",
+    name: "square"
+  },
+  params: [{
+    type: "Identifier",
+    name: "n"
+  }],
+  body: {
+    type: "BlockStatement",
+    body: [{
+      type: "ReturnStatement",
+      argument: {
+        type: "BinaryExpression",
+        operator: "*",
+        left: {
+          type: "Identifier",
+          name: "n"
+        },
+        right: {
+          type: "Identifier",
+          name: "n"
+        }
+      }
+    }]
+  }
+}
+          </code></pre>
+        </section>
+
+        <section>
+          <h3>AST Explorer</h3>
+          <p>
+            方便查看和调试 AST 的工具
+          </p>
+					<img height="450" data-src="images/babel-plugin/1.jpg">
+        </section>
+
+        <section>
+          <h3>Babel 的处理步骤</h3>
+          <p>
+            Babel 的三个主要处理步骤分别是：
+          </p>
+					<ul>
+						<li>解析（parse）</li>
+						<li>转换（transform）</li>
+						<li>生成（generate）</li>
+					</ul>
+        </section>
+
+        <section>
+          <h3>解析（parse）</h3>
+          <p>
+            Babel 读入源代码，经过词法分析、语法分析后，生成抽象语法树（AST）。
+          </p>
+          <pre><code class="hljs javascript" data-trim>
+parse(sourceCode) => AST
+          </code></pre>
+        </section>
+
+        <section>
+          <h3>转换（transform）</h3>
+					<p class="normal">经过前一阶段的代码分析，Babel 得到了 AST。在原始 AST 的基础上，Babel 通过插件，对其进行修改，比如新增、删除、修改后，得到新的 AST。</p>
+          <pre><code class="hljs javascript" data-trim>
+transform(AST, BabelPlugins) => newAST
+          </code></pre>
+        </section>
+
+        <section>
+          <h3>生成（generate）</h3>
+					<p>通过前一阶段的转换，Babel 得到了新的 AST，然后就可以逆向操作，生成新的代码。</p>
+					<pre><code class="hljs javascript" data-trim>
+generate(newAST) => newSourceCode
+          </code></pre>
+        </section>
+
+        <section>
+          <h3>插件典型结构</h3>
+					<p>典型的 Babel 插件结构，如下代码所示：</p>
+					<pre><code class="hljs javascript" data-trim>
+export default function({ types: babelTypes }) {
+  return {
+    visitor: {
+      Identifier(path, state) {},
+      ASTNodeTypeHere(path, state) {}
+    }
+  }
+}
+          </code></pre>
+          <p class="fragment normal">babelType：类似 lodash 那样的工具集，主要用来操作 AST 节点，比如创建、校验、转变等。举例：判断某个节点是不是标识符(identifier)</p>
+        </section>
+
+        <section>
+          <h3>插件典型结构</h3>
+          <pre><code class="hljs javascript" data-trim>
+export default function({ types: babelTypes }) {
+  return {
+    visitor: {
+      Identifier(path, state) {},
+      ASTNodeTypeHere(path, state) {}
+    }
+  }
+}
+          </code></pre>
+          <p class="normal">path：AST 中有很多节点，每个节点可能有不同的属性，并且节点之间可能存在关联。path 是个对象，它代表了两个节点之间的关联。你可以在 path 上访问到节点的属性，也可以通过 path 来访问到关联的节点（比如父节点、兄弟节点等）</p>
+        </section>
+
+        <section>
+          <h3>插件典型结构</h3>
+          <pre><code class="hljs javascript" data-trim>
+export default function({ types: babelTypes }) {
+  return {
+    visitor: {
+      Identifier(path, state) {},
+      ASTNodeTypeHere(path, state) {}
+    }
+  }
+}
+          </code></pre>
+          <p class="normal">state：代表了插件的状态，你可以通过 state 来访问插件的配置项</p>
+          <p class="fragment normal">visitor：Babel 采取递归的方式访问 AST 的每个节点，之所以叫做 visitor，是因为这里采用了访问者模式</p>
+        </section>
+
+        <section>
+          <h3>插件典型结构</h3>
+          <pre><code class="hljs javascript" data-trim>
+export default function({ types: babelTypes }) {
+  return {
+    visitor: {
+      Identifier(path, state) {},
+      ASTNodeTypeHere(path, state) {}
+    }
+  }
+}
+          </code></pre>
+          <p class="normal">Identifier、ASTNodeTypeHere：AST 的每个节点，都有对应的节点类型，比如标识符（Identifier）、函数声明（FunctionDeclaration）等，可以在 visitor 上声明同名的属性，当 Babel 遍历到相应类型的节点，属性对应的方法就会被调用，传入的参数就是 path、state</p>
+        </section>
+
+        <section>
+          <h3>实例</h3>
+          <p>一个在编译时进行汉字转拼音的插件</p>
+          <pre><code class="hljs javascript" data-trim>
+const pinyin = require('pinyin');
+const sysPath = require('path');
+
+const basePath = sysPath.join(__dirname, '..');
+const prefix = sysPath.join('src', 'client', 'router') + sysPath.sep;
+
+module.exports = ({ types: t }) => {
+  return {
+    visitor: {
+      // 遍历所有对象属性
+      Property(path, state) {
+        if (
+            // 判断属性值是否是字符串类型
+            t.isStringLiteral(path.node.value)
+            && path.node.key.name === 'title'
+            // 判断 AST 父节点是否是对象表达式
+            && t.isObjectExpression(path.parentPath)
+            // 判断父节点的父节点
+            && t.isObjectProperty(path.parentPath.parentPath)
+            && path.parentPath.parentPath.node.key.name === 'meta'
+            && path.parentPath.parentPath.inList) {
+
+          // 找是否存在名为 path 的 key
+          const havePathKey = path.parentPath.parentPath.container.some(
+            (item) => item.key.name === 'path'
+          );
+
+          if (havePathKey) {
+            // state.filename 是当前被处理的 js 文件路径
+            const relative = sysPath.relative(basePath, state.filename);
+
+            // 判断是否是 router 目录下的文件
+            if (relative.indexOf(prefix) !== 0) {
+              return;
+            }
+
+            const full = pinyin(path.node.value.value, {
+              style: pinyin.STYLE_NORMAL,
+              segment: true
+            });
+
+            const short = pinyin(path.node.value.value, {
+              style: pinyin.STYLE_FIRST_LETTER,
+              segment: true
+            });
+
+            // 插入 AST 节点
+            path.insertAfter(t.objectProperty(
+              // 创建名为 __pinyin__ 的标识符
+              t.identifier('__pinyin__'),
+              // 创建对象表达式
+              t.objectExpression([
+                t.objectProperty(t.identifier('full'), t.stringLiteral(full.join(' '))),
+                t.objectProperty(t.identifier('short'), t.stringLiteral(short.join('')))
+              ])
+            ));
+          }
+        }
+      }
+    }
+  }
+}
+          </code></pre>
+        </section>
+
+        <section>
+          <h3>参考资料</h3>
+          <ul>
+            <li>
+              <a href="https://github.com/brigand/babel-plugin-handbook/blob/master/translations/zh-Hans/README.md" target="_blank">官方 Babel 插件开发指南</a>
+            </li>
+            <li>
+              <a href="https://astexplorer.net/" target="_blank">AST Explorer</a>
+            </li>
+          </ul>
+        </section>
+
+        <section style="text-align: left;">
+          <h1>THE END</h1>
+          <p>谢谢！</p>
+        </section>
+
+      </div>
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+
+    <script>
+      // More info https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: false,
+
+        transition: 'slide',
+
+        // More info https://github.com/hakimel/reveal.js#dependencies
+        dependencies: [
+          { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'plugin/zoom-js/zoom.js', async: true },
+          { src: 'plugin/notes/notes.js', async: true }
+        ]
+      });
+    </script>
+  </body>
+</html>

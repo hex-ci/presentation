@@ -1,0 +1,13 @@
+.reveal h2 {
+  font-size: 1.5em;
+  text-transform: initial;
+}
+
+.reveal h3 {
+  text-transform: initial;
+}
+
+.reveal .normal {
+  text-align: left;
+  text-indent: 2em;
+}
