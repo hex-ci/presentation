@@ -29,7 +29,7 @@
     <div class="reveal">
       <div class="slides">
         <section class="center">
-          <h2>语言引擎，运行时和调用栈概述</h2>
+          <h2>JavaScript 引擎、运行时和调用栈概述</h2>
           <p>
             <small><a href="https://codeigniter.org.cn" target="_blank">Hex</a> 为您分享 / Github: <a href="https://github.com/hex-ci" target="_blank">@hex-ci</a></small>
           </p>
@@ -67,6 +67,90 @@
           </div>
         </section>
 
+        <section>
+          <h3>调用栈</h3>
+          <p>调用栈是一种数据结构，里面会记录我们在程序中的大概位置。</p>
+          <p>当执行进入一个函数，把它置于栈的顶部。</p>
+          <p>如果从函数中返回则从栈顶部移除函数。</p>
+          <p>这就是调用栈所能够做的事情。</p>
+        </section>
+
+        <section>
+          <h3>调用栈</h3>
+					<pre><code class="hljs javascript" data-trim>
+function multiply(x, y) {
+  return x * y;
+}
+
+function printSquare(x) {
+  var s = multiply(x, x);
+  console.log(s);
+}
+
+printSquare(5);
+          </code></pre>
+          <p>当引擎开始执行这段代码的时候，调用栈会被清空。</p>
+        </section>
+
+        <section>
+          <h3>调用栈</h3>
+          <div>
+            <img width="45%" data-src="images/engine-runtime-call-stack/4.png">
+          </div>
+          <p>调用栈中的每个入口被称为堆栈结构。</p>
+        </section>
+
+        <section>
+          <h3>调用栈</h3>
+          <p>当发生异常的时候可以看到调用栈的状态</p>
+					<pre><code class="hljs javascript" data-trim>
+function foo() {
+  throw new Error('SessionStack will help you resolve crashes :)');
+}
+
+function bar() {
+  foo();
+}
+
+function start() {
+  bar();
+}
+
+start();
+          </code></pre>
+          <p>
+            <img width="50%" data-src="images/engine-runtime-call-stack/5.png">
+          </p>
+        </section>
+
+        <section>
+          <h3>堆栈溢出</h3>
+					<pre><code class="hljs javascript" data-trim>
+function foo() {
+  foo();
+}
+
+foo();
+          </code></pre>
+          <p>
+            <img width="40%" data-src="images/engine-runtime-call-stack/6.png">
+          </p>
+        </section>
+
+        <section>
+          <h3>堆栈溢出</h3>
+          <p>浏览器会显示如下错误</p>
+          <p><img width="50%" data-src="images/engine-runtime-call-stack/7.png"></p>
+        </section>
+
+        <section>
+          <h3>并发和事件循环</h3>
+          <p>由于 JavaScript 只有一个调用栈，如果运行很慢会发生什么？</p>
+          <p class="fragment">
+            <img width="50%" data-src="images/engine-runtime-call-stack/8.jpeg">
+          </p>
+        </section>
+
         <section style="text-align: left;">
           <h1>THE END</h1>
           <p>谢谢！</p>
@@ -87,7 +171,7 @@
         center: false,
         width: '100%',
         height: '100%',
-        margin: 0,
+        // margin: 100,
 
         transition: 'slide',
 
