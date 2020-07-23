@@ -3,6 +3,12 @@
   text-transform: initial;
 }
 
+.reveal h3,
+.reveal h4,
+.reveal h5 {
+  text-transform: initial;
+}
+
 .reveal .sub {
   font-size: 0.8em;
 }

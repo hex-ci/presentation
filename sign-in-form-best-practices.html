@@ -37,25 +37,396 @@
         </section>
 
         <section>
-          <h3>我们将关注以下内容</h3>
+          <h3>目录</h3>
           <ul>
             <li class="fragment">使用语义化 HTML</li>
-            <li class="fragment">使用 &lt;label></li>
-            <li class="fragment">使用标签属性</li>
-            <li class="fragment">密码输入与自动完成</li>
-            <li class="fragment">不要使用再次确认输入</li>
-            <li class="fragment">不要遮挡住输入或按钮</li>
+            <li class="fragment">充分利用元素属性</li>
+            <li class="fragment">密码输入、显示与自动完成</li>
+            <li class="fragment">不要遮挡输入框或按钮</li>
             <li class="fragment">确保表单在移动设备上可用</li>
-            <li class="fragment">注册和登录页面保持统一</li>
-            <li class="fragment">在实际应用场景和本地测试</li>
-            <li class="fragment">跨浏览器和设备间进行测试</li>
+            <li class="fragment">注册和登录页面风格统一</li>
+            <li class="fragment">统计与分析</li>
+            <li class="fragment">跨设备测试</li>
           </ul>
         </section>
 
         <section>
           <h3>使用语义化 HTML</h3>
-          <p>使用以下元素构建项目：&lt;form>、&lt;label> 和 &lt;button>。</p>
-          <p>这些启用了内置的浏览器功能，改善了可访问性，并为标签增加了含义。</p>
+          <p>使用以下元素编写页面：&lt;form>、&lt;label> 和 &lt;button>。</p>
+          <p>这些元素启用了浏览器内建功能，改善了可访问性，并为标签增加了含义。</p>
+          <br>
+
+          <div class="fragment">
+            <h4>使用 &lt;form></h4>
+            <p>不要将 &lt;input> 放在 &lt;div> 中，请使用 &lt;form>，好处：</p>
+            <ul>
+              <li>对屏幕阅读器或其他辅助设备更友好</li>
+              <li>调用浏览器的内置功能</li>
+              <li>对旧浏览器兼容更好</li>
+              <li>即使 JS 失败，页面仍可正常工作</li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h4>使用 &lt;label></h4>
+          <p>请为每个 &lt;input> 启用一个 &lt;label>，例如：</p>
+
+					<pre><code class="hljs html" data-trim>
+&lt;label for="email">Email&lt;/label>
+&lt;input id="email" …>
+          </code></pre>
+          <br>
+
+          <div class="fragment">
+            <p>有什么好处？</p>
+
+            <ul>
+              <li>通过使用 label 的 for 属性将其与 input 的 name 或 id 关联起来，<br>点击标签时可使 input 框获得焦点</li>
+              <li class="fragment">当 label 或者 label 关联的 input 获得焦点时，<br>屏幕阅读器会朗读其文本</li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h4>不要使用 placeholder</h4>
+          <p class="fragment">为什么呢？（事出反常必有妖！！）</p>
+          <p class="fragment">一般人们开始输入文字后，很容易忘记输入的内容，特别是当人们注意力不集中的时候：<br>“我要输入 Email、电话还是帐户 ID？”</p>
+
+          <div class="fragment">
+            <p>除此之外 placeholder 还有其他一些潜在问题：</p>
+            <ul>
+              <li>降低可访问性</li>
+              <li>浏览器翻译工具不会翻译这个属性</li>
+              <li>......</li>
+            </ul>
+            <div class="fragment">
+              <p>扩展阅读: </p>
+              <ul>
+                <li><a href="https://www.smashingmagazine.com/2018/06/placeholder-attribute/" target="_blank">Don't Use The Placeholder Attribute</a></li>
+                <li><a href="https://www.nngroup.com/articles/form-design-placeholders/" target="_blank">Placeholders in Form Fields Are Harmful</a></li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h4>将标签放在输入框上方</h4>
+
+          <div>
+            <img width="50%" data-src="images/sign-in-form-best-practices/label-position.png">
+          </div>
+
+          <p class="fragment">
+            根据 Google AI 的研究，这样可以在移动端和桌面端之间实现一致的设计，<br>并且可以让用户更快地注意到。<br>
+            你将获得 100% 宽的标签和输入框，<br>而无需调整 label 和 input 的宽度以适合标签文本。
+          </p>
+        </section>
+
+        <section>
+          <h4>使用 &lt;button></h4>
+
+          <p>将 &lt;button> 用于按钮！<br>button 元素不仅提供可访问性和内置的表单提交功能，<br>且可以轻松设置样式。<br>使用 &lt;div> 或其他伪装成按钮的元素毫无意义。</p>
+
+          <div class="fragment">
+            <p>另外：</p>
+            <p>在注册或登录表单中使用提交按钮，要使其文本意思简单明了，<br>例如：“注册帐户”或“登录”，而不是“提交”或“开始”。</p>
+          </div>
+
+          <div class="fragment">
+            <p>关于按钮禁用：</p>
+            <ul>
+              <li>提交后要禁用按钮</li>
+              <li>请勿在等待用户输入的情况下禁用按钮</li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h4>不要使用二次确认输入</h4>
+
+          <p>
+            有些网站会强迫用户输入两次电子邮件或密码。
+          </p>
+          <p class="fragment">
+            这样做可能会减少一些用户错误，但会给用户带来额外的操作，并增加放弃率。<br>
+            两次询问操作也没有意义，因为现代浏览器会提供自动填充功能。
+          </p>
+
+          <p class="fragment">
+            另外，你需要给用户发送邮件以确认电子邮件地址；<br>并提供功能让他们轻松地重置密码。
+          </p>
+        </section>
+
+        <section>
+          <h3>充分利用元素属性</h3>
+
+          <p>例如，将 autofoucus 属性添加到登录表单的第一个 input 中，<br>将使用户更快的输入。</p>
+
+          <div>
+            <img width="40%" data-src="images/sign-in-form-best-practices/autofocus.png">
+          </div>
+        </section>
+
+        <section>
+          <h3>保护密码的私密性，但可以查看密码</h3>
+
+          <ul>
+            <li>使用 type="password" 隐藏密码</li>
+            <li class="fragment">使用 type="password" 也意味着浏览器可以在提交表单时保存密码<br>以及使用 name 和 id 属性来猜测表单输入的含义。</li>
+            <li class="fragment">
+              添加显示密码的图标或按钮，并且不要忘记添加“忘记密码”链接
+              <div>
+                <img width="100%" data-src="images/sign-in-form-best-practices/show-password-google.png">
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>为移动端提供可用的键盘</h3>
+
+          <p>
+            使用 &lt;input type="email"> 为移动用户提供适当的键盘，<br>
+            并可启用基本的电子邮件地址验证，他不需要写 JS！
+          </p>
+
+          <p class="fragment">
+            如使用电话号码，请使用 &lt;input type="tel"><br>
+            还可在必要时使用 inputmode 属性 inputmode="numeric"<br>
+            是 PIN 码的理想选择。
+          </p>
+
+          <p class="fragment">
+            注意，type="number" 将添加向上/向下箭头，<br>
+            因此请勿将其用于不希望增加的数字，例如 ID 和帐号。
+          </p>
+        </section>
+
+        <section>
+          <h4>防止移动端键盘遮挡“登录”按钮</h4>
+
+          <p>错误范例：</p>
+          <div>
+            <img width="40%" data-src="images/sign-in-form-best-practices/keyboard-not-ok.png">
+          </div>
+        </section>
+
+        <section>
+          <h4>防止移动端键盘遮挡“登录”按钮</h4>
+
+          <p>正确范例：</p>
+          <div>
+            <img width="23%" data-src="images/sign-in-form-best-practices/keyboard-ok.png">
+          </div>
+        </section>
+
+        <section>
+          <h5>在各种设备上测试</h5>
+
+          <p>BrowserStack 可以在一系列实际设备和浏览器上对开源项目进行免费测试</p>
+          <div>
+            <img width="55%" data-src="images/sign-in-form-best-practices/iphone-keyboard.png">
+          </div>
+        </section>
+
+        <section>
+          <h5>使用两步操作</h5>
+
+          <p>一些网站通过两步操作：先输入电子邮件/电话，再输入密码。<br>这种方法简化了体验：一次只给用户分配一件事。</p>
+          <div>
+            <img width="38%" data-src="images/sign-in-form-best-practices/amazon-signin-mobile.png">
+          </div>
+        </section>
+
+        <section>
+          <h4>帮助用户避免重新输入数据</h4>
+
+          <p>
+            <br>
+            可以通过浏览器自动填充来帮助用户，<br>
+            这对于<a href="https://www.formisimo.com/blog/conversion-rate-increases-57-with-form-analytics-case-study/" target="_blank">放弃率很高</a>的电子邮件输入尤其重要：
+          </p>
+
+          <ul>
+            <li class="fragment">使用 input 元素的 name 属性可帮助浏览器存储自动填充数据</li>
+            <li class="fragment">autocomplete 属性使浏览器可使用 name 属性存储的数据自动填充</li>
+          </ul>
+        </section>
+
+        <section>
+          <h4>不要在注册表单上自动填写密码</h4>
+
+          <p>
+            <br>
+            如果浏览器已经存储了该站点的密码，<br>
+            那么在注册时自动填写密码没有意义，<br>
+            例如，如果两个人共享同一设备，而一个人想要创建一个新帐户。
+          </p>
+        </section>
+
+        <section>
+          <h4>用户输入新密码时，请使用 name="new-password"</h4>
+
+          <p>
+            <br>
+            为密码框起适当的名称来帮助浏览器区分新密码和当前密码：
+          </p>
+
+          <ul>
+            <li>
+              将 name="new-password" 用于注册表单中的密码框，<br>
+              或修改密码表单中的新密码框。<br>
+              这将告诉浏览器你希望存储该站点的新密码。</li>
+          </ul>
+
+          <div class="fragment">
+            <p>在注册表单中的例子：</p>
+
+            <pre><code class="hljs html" data-trim>
+&lt;input name="new-password" type="password" …>
+            </code></pre>
+          </div>
+        </section>
+
+        <section>
+          <h4>用户输入现有密码时，请使用 name="current-password"</h4>
+          <br>
+          <ul>
+            <li>
+              将 name="current-password" 用于登录表单中的密码框，<br>
+              或修改密码表单中的旧密码框。<br>
+              这将告诉浏览器你希望存储该站点的当前密码。
+            </li>
+          </ul>
+
+          <div class="fragment">
+            <p>在登录表单中例子：</p>
+
+            <pre><code class="hljs html" data-trim>
+&lt;input name="current-password" type="password" autocomplete="current-password" …>
+            </code></pre>
+          </div>
+        </section>
+
+        <section>
+          <h4>使用密码管理器</h4>
+
+          <p>Safari 11 及更高版本中的密码管理器：</p>
+
+          <div>
+            <img width="100%" data-src="images/sign-in-form-best-practices/safari-signin-desktop.png">
+          </div>
+        </section>
+
+        <section>
+          <h4>使用密码管理器</h4>
+
+          <p>Chrome 83 中的密码管理器：</p>
+
+          <div>
+            <img width="100%" data-src="images/sign-in-form-best-practices/chrome-signin-desktop.png">
+          </div>
+        </section>
+
+        <section>
+          <h4>启用浏览器的生成密码功能</h4>
+
+          <p>
+            如果在注册表单中为密码框包含了 autocomplete="new-password"，<br>
+            现代浏览器会弹出生成密码功能。
+          </p>
+
+          <div>
+            <img width="100%" data-src="images/sign-in-form-best-practices/safari-password-suggestion.png">
+          </div>
+        </section>
+
+        <section>
+          <h4>帮助用户避免意外丢失输入</h4>
+
+          <p>
+            将 required 属性添加到 input 元素中，<br>
+            现代浏览器会自动提示并设置焦点。不用写 JS！
+          </p>
+
+          <div>
+            <img width="55%" data-src="images/sign-in-form-best-practices/missing-field-firefox-android.png">
+          </div>
+        </section>
+
+        <section>
+          <h3>为手指和拇指而设计</h3>
+
+          <p>
+            <br>
+            input 元素和按钮的默认大小都比较小，<br>
+            这是许多站点登录表单的常见问题，<br>
+            尤其是在移动设备上。
+          </p>
+        </section>
+
+        <section>
+          <h4>确保输入框和按钮足够大</h4>
+
+          <p>
+            输入框和按钮的默认大小和内边距在桌面浏览器上太小，<br>
+            在移动设备上甚至更糟。
+          </p>
+
+          <div>
+            <img width="65%" data-src="images/sign-in-form-best-practices/unstyled-form.png">
+          </div>
+        </section>
+
+        <section>
+          <h5>为拇指而设计</h5>
+
+          <p>
+            <br>
+            搜索 <a href="https://www.google.com/search?q=touch+target">touch target</a>，你会看到很多有关食指操作的图片。<br>
+            但是，在现实世界中，许多人会用拇指与移动设备互动。<br>
+            拇指比食指大，控制也不那么精确。<br>
+            更重要的是要有足够大小的触摸目标。
+          </p>
+        </section>
+
+        <section>
+          <h4>使文字足够大</h4>
+
+          <p>
+            与大小和内边距一样，输入框和按钮的默认浏览器字体大小也太小，<br>
+            尤其是在移动设备上。
+          </p>
+
+          <div>
+            <img width="58%" data-src="images/sign-in-form-best-practices/unstyled-form-text.png">
+          </div>
+        </section>
+
+        <section>
+          <h4>在输入框之间提供足够的空间</h4>
+
+          <p>
+            <br>
+            添加足够的边距以使输入能够很好地用作触摸目标。<br>
+            换句话说，以手指宽度的边缘为目标。
+          </p>
+        </section>
+
+        <section>
+          <h4>确保你的输入清晰可见</h4>
+
+          <p>
+            输入框的默认边框样式使它们在一些平台上难以看清，<br>
+            例如 Android 版 Chrome 上，它们几乎是不可见的。<br>
+            除了 padding 外，还要添加 border：<br>
+            在白色背景上，一个好的通用规则是使用 #ccc 或更暗的颜色。
+          </p>
+
+          <div>
+            <img width="15%" data-src="images/sign-in-form-best-practices/styled-signin-form.png">
+          </div>
         </section>
 
         <section style="text-align: left;">
