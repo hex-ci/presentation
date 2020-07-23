@@ -30,16 +30,32 @@
       <div class="slides">
         <section class="center">
           <h2>登录表单最佳实践</h2>
-          <h3>使用跨平台的浏览器特性来构建安全、可访问性高且易于使用的登录表单</h3>
+          <p class="sub">使用跨平台的浏览器特性来构建安全、可访问性高且易于使用的登录表单</p>
           <p>
             <small><a href="https://codeigniter.org.cn" target="_blank">Hex</a> 为您分享 / Github: <a href="https://github.com/hex-ci" target="_blank">@hex-ci</a></small>
           </p>
         </section>
 
         <section>
-          <h2>我们将关注以下内容</h2>
+          <h3>我们将关注以下内容</h3>
           <ul>
+            <li class="fragment">使用语义化 HTML</li>
+            <li class="fragment">使用 &lt;label></li>
+            <li class="fragment">使用标签属性</li>
+            <li class="fragment">密码输入与自动完成</li>
+            <li class="fragment">不要使用再次确认输入</li>
+            <li class="fragment">不要遮挡住输入或按钮</li>
+            <li class="fragment">确保表单在移动设备上可用</li>
+            <li class="fragment">注册和登录页面保持统一</li>
+            <li class="fragment">在实际应用场景和本地测试</li>
+            <li class="fragment">跨浏览器和设备间进行测试</li>
           </ul>
+        </section>
+
+        <section>
+          <h3>使用语义化 HTML</h3>
+          <p>使用以下元素构建项目：&lt;form>、&lt;label> 和 &lt;button>。</p>
+          <p>这些启用了内置的浏览器功能，改善了可访问性，并为标签增加了含义。</p>
         </section>
 
         <section style="text-align: left;">
