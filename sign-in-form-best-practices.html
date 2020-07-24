@@ -38,15 +38,12 @@
 
         <section>
           <h3>目录</h3>
+          <br>
           <ul>
-            <li class="fragment">使用语义化 HTML</li>
-            <li class="fragment">充分利用元素属性</li>
-            <li class="fragment">密码输入、显示与自动完成</li>
-            <li class="fragment">不要遮挡输入框或按钮</li>
-            <li class="fragment">确保表单在移动设备上可用</li>
-            <li class="fragment">注册和登录页面风格统一</li>
-            <li class="fragment">统计与分析</li>
-            <li class="fragment">跨设备测试</li>
+            <li>使用语义化 HTML</li>
+            <li>易用性</li>
+            <li>移动优先</li>
+            <li>统计与分析</li>
           </ul>
         </section>
 
@@ -118,8 +115,10 @@
           </div>
 
           <p class="fragment">
-            根据 Google AI 的研究，这样可以在移动端和桌面端之间实现一致的设计，<br>并且可以让用户更快地注意到。<br>
-            你将获得 100% 宽的标签和输入框，<br>而无需调整 label 和 input 的宽度以适合标签文本。
+            根据 <a href="https://ai.googleblog.com/2014/07/simple-is-better-making-your-web-forms.html" target="_blank">Google AI 的研究</a>，这样可以在移动端和桌面端之间实现一致的设计，<br>
+            并可让用户更快地注意到。<br>
+            你将获得 100% 宽度的标签和输入框，<br>
+            而无需调整 label 和 input 的宽度以适合标签文本。
           </p>
         </section>
 
@@ -194,7 +193,9 @@
           <p class="fragment">
             如使用电话号码，请使用 &lt;input type="tel"><br>
             还可在必要时使用 inputmode 属性 inputmode="numeric"<br>
-            是 PIN 码的理想选择。
+            这是输入 PIN 码的理想选择。<br>
+            扩展阅读：<br>
+            <a href="https://css-tricks.com/everything-you-ever-wanted-to-know-about-inputmode/" target="_blank">Everything You Ever Wanted to Know About inputmode</a>
           </p>
 
           <p class="fragment">
@@ -224,7 +225,7 @@
         <section>
           <h5>在各种设备上测试</h5>
 
-          <p>BrowserStack 可以在一系列实际设备和浏览器上对开源项目进行免费测试</p>
+          <p>BrowserStack 可以在一系列实际设备和浏览器上对<a href="https://www.browserstack.com/open-source" target="_blank">开源项目进行免费测试</a></p>
           <div>
             <img width="55%" data-src="images/sign-in-form-best-practices/iphone-keyboard.png">
           </div>
@@ -380,11 +381,32 @@
         </section>
 
         <section>
+          <h4>确保输入框和按钮足够大</h4>
+
+          <p>
+            根据 <a href="https://support.google.com/accessibility/android/answer/7101858?hl=en-GB" target="_blank">Android 可访问性指南</a>，<br>
+            触摸屏对象的建议目标大小为 7–10 mm，<br>
+            Apple 界面指南建议使用 48x48 像素，<br>
+            W3C 建议<a href="https://www.w3.org/WAI/WCAG21/Understanding/target-size.html" target="_blank">至少 44x44 CSS 像素</a>。
+          </p>
+
+          <p class="fragment">
+            在此基础上，<br>
+            向移动端的输入元素和按钮添加（至少）大约 15 像素的 padding，<br>
+            在桌面端添加大约 10 像素的 padding。
+          </p>
+
+          <p class="fragment">
+            <a href="https://web.dev/tap-targets/" target="_blank">触摸目标大小是否合理</a>的检测可以使用 Lighthouse
+          </p>
+        </section>
+
+        <section>
           <h5>为拇指而设计</h5>
 
           <p>
             <br>
-            搜索 <a href="https://www.google.com/search?q=touch+target">touch target</a>，你会看到很多有关食指操作的图片。<br>
+            搜索 <a href="https://www.google.com/search?q=touch+target" target="_blank">touch target</a>，你会看到很多有关食指操作的图片。<br>
             但是，在现实世界中，许多人会用拇指与移动设备互动。<br>
             拇指比食指大，控制也不那么精确。<br>
             更重要的是要有足够大小的触摸目标。
@@ -402,6 +424,33 @@
           <div>
             <img width="58%" data-src="images/sign-in-form-best-practices/unstyled-form-text.png">
           </div>
+        </section>
+
+        <section>
+          <h4>使文字足够大</h4>
+
+          <p>
+            不同平台上的浏览器字体大小不同，<br>
+            对热门网站的快速调查显示，<br>
+            在桌面端 13–16 像素的字体大小：<br>
+            所匹配的物理大小是移动端的最小值。
+          </p>
+
+          <p class="fragment">
+            请在移动端使用更大的字号：<br>
+            桌面端 Chrome 上 16px 很清晰，<br>
+            那么在 Android 上也很难阅读 16px 的文本。<br>
+            20px 大约可以在移动设备上使用，<br>
+            但也应该考虑视力不佳的童鞋。
+          </p>
+
+          <p class="fragment">
+            注意：<br>
+            不幸的是，自动填充文本（至少在 Android 的 Chrome 上）很小，<br>
+            也无法使用 CSS 调整大小。<br>
+            <a href="https://crbug.com/953689" target="_blank">Chromium Issue #953689</a> 正在跟踪这个问题。<br>
+            如果你对这个感兴趣，请为他打个 call！
+          </p>
         </section>
 
         <section>
@@ -425,13 +474,263 @@
           </p>
 
           <div>
-            <img width="15%" data-src="images/sign-in-form-best-practices/styled-signin-form.png">
+            <img width="14%" data-src="images/sign-in-form-best-practices/styled-signin-form.png">
           </div>
+        </section>
+
+        <section>
+          <h4>使用浏览器内建功能来提示无效输入</h4>
+
+          <p>
+            浏览器支持对具有 type 属性的输入框进行基本的表单验证。<br>
+            当你提交无效内容时，浏览器会显示提示，<br>
+            并将焦点放在有问题的输入框上。
+          </p>
+
+          <div>
+            <img width="33%" data-src="images/sign-in-form-best-practices/invalid-email.png">
+          </div>
+        </section>
+
+        <section>
+          <h4>使用浏览器内建功能来提示无效输入</h4>
+
+          <p>
+            可以使用 :invalid CSS 选择器高亮显示无效数据。<br>
+            使用 :not(:placeholder-shown) 避免选择到没有内容的输入框。
+          </p>
+
+          <p>例如：</p>
+
+          <pre><code class="hljs css" data-trim>
+input[type=email]:not(:placeholder-shown):invalid {
+  color: red;
+  outline-color: red;
+}
+          </code></pre>
+        </section>
+
+        <section>
+          <h3>必要时使用 JS</h3>
+
+          <h4>显示密码功能</h4>
+
+          <p>
+            应该添加显示密码图标或按钮，<br>
+            以使用户能够检查他们输入的文本。<br>
+            当用户看不到他们输入的文本时，<a href="https://www.nngroup.com/articles/stop-password-masking/" target="_blank">可用性会受到影响</a>。<br>
+            尽管有<a href="https://twitter.com/sw12/status/1251191795377156099" target="_blank">实施计划</a>，但目前尚无内置方法。扔需要使用 JS。
+          </p>
+
+          <div>
+            <img width="60%" data-src="images/sign-in-form-best-practices/show-password-google.png">
+          </div>
+        </section>
+
+        <section>
+          <h4>显示密码功能</h4>
+
+          <p>
+            以下代码使用文本按钮添加“显示密码”功能。
+          </p>
+
+          <p>HTML：</p>
+
+          <pre><code class="hljs html" data-trim>
+&lt;section>
+  &lt;label for="password">Password&lt;/label>
+  &lt;button id="toggle-password" type="button"
+    aria-label="Show password as plain text. Warning: this will display your password on the screen.">
+      Show password
+  &lt;/button>
+  &lt;input id="password" name="password" type="password" autocomplete="current-password" required>
+&lt;/section>
+          </code></pre>
+        </section>
+
+        <section>
+          <h4>显示密码功能</h4>
+
+          <p>CSS：</p>
+
+          <pre><code class="hljs css" data-trim>
+button#toggle-password {
+  background: none;
+  border: none;
+  cursor: pointer;
+  /* Media query isn't shown here. */
+  font-size: var(--mobile-font-size);
+  font-weight: 300;
+  padding: 0;
+  /* Display at the top right of the container */
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+          </code></pre>
+        </section>
+
+        <section>
+          <h4>显示密码功能</h4>
+
+          <p>JS：</p>
+
+          <pre><code class="hljs javascript" style="max-height: 600px" data-trim>
+const passwordInput = document.getElementById('password');
+const togglePasswordButton = document.getElementById('toggle-password');
+
+togglePasswordButton.addEventListener('click', togglePassword);
+
+function togglePassword() {
+  if (passwordInput.type === 'password') {
+    passwordInput.type = 'text';
+    togglePasswordButton.textContent = 'Hide password';
+    togglePasswordButton.setAttribute('aria-label',
+      'Hide password.');
+  } else {
+    passwordInput.type = 'password';
+    togglePasswordButton.textContent = 'Show password';
+    togglePasswordButton.setAttribute('aria-label',
+      'Show password as plain text. ' +
+      'Warning: this will display your password on the screen.');
+  }
+}
+          </code></pre>
+        </section>
+
+        <section>
+          <h4>显示密码功能</h4>
+
+          <p>效果如图：</p>
+
+          <div>
+            <img width="60%" data-src="images/sign-in-form-best-practices/show-password.png">
+          </div>
+        </section>
+
+        <section>
+          <h4>提高密码输入框的可访问性</h4>
+
+          <p>
+            使用 aria-describedby 属性指向一个描述密码规则的元素。<br>
+            为屏幕阅读器提供标签文本、输入框类型（密码）和描述信息。
+          </p>
+
+          <pre><code class="hljs html" data-trim>
+&lt;input type="password" aria-describedby="password-constraints" …>
+&lt;div id="password-constraints">Eight or more characters with a mix of letters, numbers and symbols.&lt;/div>
+          </code></pre>
+
+          <div class="fragment">
+            <p>
+              当添加“显示密码”功能时，请确保包含一个 aria-label 以警告将要显示密码。<br>
+              否则，用户可能会无意间泄露密码。
+            </p>
+
+            <pre><code class="hljs html" data-trim>
+&lt;button id="toggle-password"
+aria-label="Show password as plain text.
+            Warning: this will display your password on the screen.">
+  Show password
+&lt;/button>
+            </code></pre>
+          </div>
+        </section>
+
+        <section>
+          <h4>在提交之前进行实时验证</h4>
+
+          <p>
+            <br>
+            HTML 表单元素和属性具有用于基本验证的内建功能，<br>
+            但在用户输入数据以及尝试提交表单时，<br>
+            还应该使用 JS 进行更可靠的验证。
+          </p>
+
+          <p class="fragment">
+            <br>
+            警告：客户端验证可帮助用户输入数据并避免不必要的服务器负载，<br>
+            但也必须始终在后端进行数据验证和数据过滤。
+          </p>
+
+          <p class="fragment">
+            <br>
+            扩展阅读：<br>
+            <a href="https://developers.google.com/web/fundamentals/design-and-ux/input/forms#use_javascript_for_more_complex_real-time_validation" target="_blank">Use JavaScript for more complex real-time validation</a>
+          </p>
+        </section>
+
+        <section>
+          <h4>统计与分析</h4>
+
+          <p class="fragment">
+            “没有量化，就没有优化”，对于注册和登录表单尤其如此。<br>
+            你需要设定目标，量化，并持续改善网站。
+          </p>
+
+          <p class="fragment">
+            <a href="https://www.nngroup.com/articles/discount-usability-20-years/" target="_blank">Discount Usability 测试</a>对于尝试更改很有帮助，<br>
+            但你需要真实数据才能真正了解用户：
+          </p>
+
+          <ul>
+            <li class="fragment">页面统计：注册和登录页的 PV、跳出率和退出率等。</li>
+            <li class="fragment">
+              交互分析：<a href="https://support.google.com/analytics/answer/6180923?hl=en" target="_blank">目标漏斗</a>（用户在哪里放弃登录？）<br>
+              <a href="https://developers.google.com/analytics/devguides/collection/gtagjs/events" target="_blank">事件</a>（用户在与表单交互时会采取什么操作？）
+            </li>
+            <li class="fragment">
+              网站性能：以用户为中心的指标
+            </li>
+          </ul>
+
+          <p class="fragment"><br>考虑实施 A/B 测试</p>
+        </section>
+
+        <section>
+          <h3>总结</h3>
+
+          <ul>
+            <li class="fragment">不要让用户搜寻登录！</li>
+            <li class="fragment">保持专注！</li>
+            <li class="fragment">最小化注册复杂性。</li>
+            <li class="fragment">让用户清楚登录或注册对他们有什么好处。</li>
+            <li class="fragment">尽可能使用手机号。</li>
+            <li class="fragment">方便用户重置密码。</li>
+            <li class="fragment">提供服务条款和隐私政策链接。</li>
+            <li class="fragment">使注册和登录页面保持与全站风格统一</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>扩展阅读</h3>
+
+          <ul>
+            <li><a href="https://developers.google.com/web/fundamentals/design-and-ux/input/forms" target="_blank">Create Amazing Forms</a></li>
+            <li><a href="https://www.smashingmagazine.com/2018/08/best-practices-for-mobile-form-design/" target="_blank">Best Practices For Mobile Form Design</a></li>
+            <li><a href="https://web.dev/more-capable-form-controls" target="_blank">More capable form controls</a></li>
+            <li><a href="https://webaim.org/techniques/forms/" target="_blank">Creating Accessible Forms</a></li>
+            <li><a href="https://developers.google.com/web/updates/2016/04/credential-management-api" target="_blank">Streamlining the Sign-in Flow Using Credential Management API</a></li>
+            <li><a href="https://web.dev/web-otp/" target="_blank">Verify phone numbers on the web with the Web OTP API</a></li>
+          </ul>
         </section>
 
         <section style="text-align: left;">
           <h1>THE END</h1>
           <p>谢谢！</p>
+
+          <p>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <small>参考资料：<a href="https://web.dev/sign-in-form-best-practices/" target="_blank">Sign-in form best practices</a></small>
+          </p>
         </section>
 
       </div>
