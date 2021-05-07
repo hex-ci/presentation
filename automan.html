@@ -124,8 +124,58 @@
         <section>
           <h3>组件结构</h3>
 
+          <p>
+            组件自有逻辑 mixin 自定义脚本
+          </p>
+
           <div>
-            <img width="65%" style="background-color: white;" data-src="images/automan/3.png">
+            <img width="63%" style="background-color: white;" data-src="images/automan/3.png">
+          </div>
+        </section>
+
+        <section>
+          <h3>组件结构</h3>
+
+          <p>这是上图中一个 node 的 DOM 结构</p>
+
+					<pre><code class="hljs html" style="max-height: 100%;" data-trim>
+            <div v-show="visible" :style="nodeInfo.style">
+              <component :is="nodeInfo.id" v-bind="nodeInfo.props" :style="componentStyle"></component>
+              <node v-if="nodeInfo.child" v-for="item in nodeInfo.child" :info="item" :key="item.id"></node>
+            </div>
+          </code></pre>
+
+          <div class="fragment">
+            <p>
+              一个 node 的逻辑功能=组件逻辑+脚本1+脚本2+脚本3...<br>
+              核心代码如下
+            </p>
+
+            <pre><code class="hljs js" data-trim>
+              // 通过加载到的组件代码所获得的全局对象来创建 Vue 对象
+              // window['image_1.0.3'] 是加载组件代码后生成的对象
+              let component = Vue.extend(window['image_1.0.3'])
+
+              // 遍历所有加入的脚本 mixin 到组件对象中
+              nodeInfo.script.forEach(value => {
+                component = component.extend(value)
+              })
+
+              // 以节点 id 为组件名，注册最终组件对象
+              Vue.component(nodeInfo.id, component)
+            </code></pre>
+          </div>
+        </section>
+
+        <section>
+          <h3>组件结构</h3>
+
+          <p>
+            组件如何暴露可编辑的属性
+          </p>
+
+          <div>
+            <img width="45%" style="background-color: white;" data-src="images/automan/4.png">
           </div>
         </section>
 
