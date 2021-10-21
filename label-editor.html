@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>前端冷知识 Selection 及其应用</title>
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/black.css" id="theme">
+    <link rel="stylesheet" href="css/default.css">
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+    <style>
+      kbd {
+        display: inline-block;
+        color: rgb(175, 175, 255);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section class="center">
+          <h2>前端冷知识 Selection 及其应用</h2>
+          <p class="sub">介绍开发歌词标注编辑器过程中用到的知识</p>
+          <p>
+            <small><a href="https://codeigniter.org.cn" target="_blank">Hex</a> 为您分享 / Github: <a href="https://github.com/hex-ci" target="_blank">@hex-ci</a></small>
+          </p>
+        </section>
+
+        <section>
+          <h3>目录</h3>
+          <br>
+          <ul>
+            <li>效果演示</li>
+            <li>什么是 Selection 和 Range</li>
+            <li>如何使用 Selection 和 Range</li>
+            <li>如何制作卡拉OK歌词效果</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>效果演示</h3>
+          <div>
+            <video src="images/label-editor/1.mp4" controls autoplay width="73%"></video>
+          </div>
+        </section>
+
+        <section>
+          <h3>Selection 和 Range 可以做什么？</h3>
+
+          <br>
+
+          <p>
+            可以获取现有选中内容，选择/取消全部或部分选中内容，<br>
+            从文档中删除所选部分，或将其包装到一个标签（如 span）中等。
+          </p>
+
+          <br>
+
+          <ul>
+            <li>划词翻译</li>
+            <li>网页笔记</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>什么是 Range</h3>
+
+          <p>本质上是一对“边界点”：范围起点和范围终点。</p>
+
+          <p>考虑以下 HTML 片段：</p>
+
+          <pre><code class="hljs html" data-trim>
+            &lt;p id="p">Example: &lt;i>italic&lt;/i> and &lt;b>bold&lt;/b></p>
+          </code></pre>
+
+          <div>
+            <img width="30%" data-src="images/label-editor/2.jpg">
+          </div>
+
+          <p>让我们来选择 <kbd>Example: &lti>italic&lt;/i></kbd>，它是 <kbd>&lt;p></kbd> 的前两个子节点</p>
+        </section>
+
+        <section>
+          <h3>什么是 Range</h3>
+
+          <p>我们先来创建一个 Range</p>
+
+          <pre><code class="hljs js" data-trim>
+            let range = new Range();
+          </code></pre>
+
+          <p><kbd>range.setStart(node, offset)</kbd> 和 <kbd>range.setEnd(node, offset)</kbd> 来设置边界</p>
+
+          <pre><code class="hljs js" data-trim>
+            range.setStart(p, 0); // 将起点设置为 &lt;p> 的第 0 个子节点（即文本节点 Example:）
+            range.setEnd(p, 2); // 覆盖范围至（但不包括）&lt;p> 的第 2 个子节点（即文本节点 and，但由于不包括末节点，所以最后选择的节点是 &lt;i>）
+          </code></pre>
+
+          <div>
+            <img width="30%" data-src="images/label-editor/3.jpg">
+          </div>
+        </section>
+
+        <section>
+          <h3>什么是 Range</h3>
+
+        </section>
+
+        <section style="text-align: left;">
+          <h1>THE END</h1>
+          <p>谢谢！</p>
+          <p>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <small>
+              参考资料：
+              <ol>
+                <li><a href="https://zh.javascript.info/selection-range" target="_blank">文档1</a></li>
+                <li><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Selection" target="_blank">文档2</a></li>
+              </ol>
+            </small>
+          </p>
+        </section>
+
+      </div>
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+
+    <script>
+      // More info https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: false,
+        width: '100%',
+        height: '100%',
+        // margin: 100,
+
+        transition: 'slide',
+
+        // More info https://github.com/hakimel/reveal.js#dependencies
+        dependencies: [
+          { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'plugin/zoom-js/zoom.js', async: true },
+          { src: 'plugin/notes/notes.js', async: true }
+        ]
+      });
+    </script>
+  </body>
+</html>
