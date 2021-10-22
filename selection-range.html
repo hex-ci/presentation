@@ -73,7 +73,7 @@
           <br>
 
           <ul>
-            <li>歌词标注编辑器</li>
+            <li>歌词标注编辑器<span class="fragment">（划掉）</span></li>
             <li>划词翻译</li>
             <li>网页批注</li>
           </ul>
@@ -86,17 +86,19 @@
 
           <p>本质上是一对“边界点”：范围起点和范围终点</p>
 
-          <p>考虑以下 HTML 片段：</p>
+          <div class="fragment">
+            <p>考虑以下 HTML 片段：</p>
 
-          <pre><code class="hljs html" data-trim>
-            &lt;p id="p">Example: &lt;i>italic&lt;/i> and &lt;b>bold&lt;/b></p>
-          </code></pre>
+            <pre><code class="hljs html" data-trim>
+              &lt;p id="p">Example: &lt;i>italic&lt;/i> and &lt;b>bold&lt;/b></p>
+            </code></pre>
 
-          <div>
-            <img width="30%" data-src="images/selection-range/2.png">
+            <div>
+              <img width="30%" data-src="images/selection-range/2.png">
+            </div>
+
+            <p>让我们来选择 <kbd>Example: &lti>italic&lt;/i></kbd>，它是 <kbd>&lt;p></kbd> 的前两个子节点</p>
           </div>
-
-          <p>让我们来选择 <kbd>Example: &lti>italic&lt;/i></kbd>，它是 <kbd>&lt;p></kbd> 的前两个子节点</p>
         </section>
 
         <section>
@@ -108,25 +110,27 @@
             let range = new Range();
           </code></pre>
 
-          <p><kbd>range.setStart(node, offset)</kbd> 和 <kbd>range.setEnd(node, offset)</kbd> 来设置边界</p>
+          <div class="fragment">
+            <p><kbd>range.setStart(node, offset)</kbd> 和 <kbd>range.setEnd(node, offset)</kbd> 来设置边界</p>
 
-          <pre><code class="hljs js" data-trim>
-            range.setStart(p, 0); // 将起点设置为 &lt;p> 的第 0 个子节点（即文本节点 Example:）
-            range.setEnd(p, 2); // 覆盖范围至（但不包括）&lt;p> 的第 2 个子节点（即文本节点 and，但由于不包括末节点，所以最后选择的节点是 &lt;i>）
-          </code></pre>
+            <pre><code class="hljs js" data-trim>
+              range.setStart(p, 0); // 将起点设置为 &lt;p> 的第 0 个子节点（即文本节点 Example:）
+              range.setEnd(p, 2); // 覆盖范围至（但不包括）&lt;p> 的第 2 个子节点（即文本节点 and，但由于不包括末节点，所以最后选择的节点是 &lt;i>）
+            </code></pre>
 
-          <div>
-            <img width="70%" data-src="images/selection-range/3.png">
+            <div>
+              <img width="70%" data-src="images/selection-range/3.png">
+            </div>
+
+            <ul>
+              <li><a href="https://embed.plnkr.co/plunk/HiwTC0JWbvTnAtDk" target="_blank">例子1</a></li>
+              <li><a href="https://embed.plnkr.co/plunk/qZGG3d4xP6m8Z9zP" target="_blank">例子2</a></li>
+            </ul>
           </div>
-
-          <ul>
-            <li><a href="https://embed.plnkr.co/plunk/HiwTC0JWbvTnAtDk" target="_blank">例子1</a></li>
-            <li><a href="https://embed.plnkr.co/plunk/qZGG3d4xP6m8Z9zP" target="_blank">例子2</a></li>
-          </ul>
         </section>
 
         <section>
-          <h3>选择文本节点的一部分</h3>
+          <h4>选择文本节点的一部分</h4>
 
           <p>让我们选择部分文本，像这样：</p>
 
@@ -136,32 +140,34 @@
 
           <!-- <p>只需要将起点和终点设置为文本节点中的相对偏移量即可</p> -->
 
-          <ul>
-            <li>从 <kbd>&lt;p></kbd> 的第一个子节点的位置 2 开始（选择 <kbd>Example:</kbd> 中除前两个字母外的所有字母）</li>
-            <li>到 <kbd>&lt;b></kbd> 的第一个子节点的位置 3 结束（选择 <kbd>bold</kbd> 的前三个字母）</li>
-          </ul>
+          <div class="fragment">
+            <ul>
+              <li>从 <kbd>&lt;p></kbd> 的第一个子节点的位置 2 开始（选择 <kbd>Example:</kbd> 中除前两个字母外的所有字母）</li>
+              <li>到 <kbd>&lt;b></kbd> 的第一个子节点的位置 3 结束（选择 <kbd>bold</kbd> 的前三个字母）</li>
+            </ul>
 
-          <pre><code class="hljs html" data-trim>
-            <p id="p">Example: <i>italic</i> and <b>bold</b></p>
+            <pre><code class="hljs html" data-trim>
+              <p id="p">Example: <i>italic</i> and <b>bold</b></p>
 
-            &lt;script>
-              let range = new Range();
+              &lt;script>
+                let range = new Range();
 
-              range.setStart(p.firstChild, 2);
-              range.setEnd(p.querySelector('b').firstChild, 3);
+                range.setStart(p.firstChild, 2);
+                range.setEnd(p.querySelector('b').firstChild, 3);
 
-              alert(range); // ample: italic and bol
+                alert(range); // ample: italic and bol
 
-              // 使用此范围进行选择
-              window.getSelection().addRange(range);
-            &lt;/script>
-          </code></pre>
+                // 使用此范围进行选择
+                window.getSelection().addRange(range);
+              &lt;/script>
+            </code></pre>
 
-          <p><a href="https://embed.plnkr.co/plunk/vJS9grmXGrnoi4uV" target="_blank">运行代码</a></p>
+            <p><a href="https://embed.plnkr.co/plunk/vJS9grmXGrnoi4uV" target="_blank">运行代码</a></p>
+          </div>
         </section>
 
         <section>
-          <h3>选择文本节点的一部分</h3>
+          <h4>选择文本节点的一部分</h4>
 
           <p><kbd>range</kbd> 对象具有以下属性：</p>
 
@@ -192,35 +198,37 @@
 
           <ul>
             <li>
-              <kbd>setStart(node, offset)</kbd> 将起点设置在 <kbd>node</kbd> 中的位置 <kbd>offset</kbd>
+              <kbd>setStart(node, offset)</kbd>：将起点设置在 <kbd>node</kbd> 中的位置 <kbd>offset</kbd>
             </li>
             <li>
-              <kbd>setStartBefore(node)</kbd> 将起点设置在 <kbd>node</kbd> 前面
+              <kbd>setStartBefore(node)</kbd>：将起点设置在 <kbd>node</kbd> 前面
             </li>
             <li>
-              <kbd>setStartAfter(node)</kbd> 将起点设置在 <kbd>node</kbd> 后面
+              <kbd>setStartAfter(node)</kbd>：将起点设置在 <kbd>node</kbd> 后面
             </li>
           </ul>
 
           <br><br>
 
-          <p>设置范围的终点：</p>
+          <div class="fragment">
+            <p>设置范围的终点：</p>
 
-          <ul>
-            <li>
-              <kbd>setEnd(node, offset)</kbd> 将终点设置为 <kbd>node</kbd> 中的位置 <kbd>offset</kbd>
-            </li>
-            <li>
-              <kbd>setEndBefore(node)</kbd> 将终点设置为 <kbd>node</kbd> 前面
-            </li>
-            <li>
-              <kbd>setEndAfter(node)</kbd> 将终点设置为 <kbd>node</kbd> 后面
-            </li>
-          </ul>
+            <ul>
+              <li>
+                <kbd>setEnd(node, offset)</kbd>：将终点设置为 <kbd>node</kbd> 中的位置 <kbd>offset</kbd>
+              </li>
+              <li>
+                <kbd>setEndBefore(node)</kbd>：将终点设置为 <kbd>node</kbd> 前面
+              </li>
+              <li>
+                <kbd>setEndAfter(node)</kbd>：将终点设置为 <kbd>node</kbd> 后面
+              </li>
+            </ul>
+          </div>
 
-          <br><br>
+          <br>
 
-          <p>
+          <p class="fragment">
             <kbd>node</kbd> 既可以是文本节点，也可以是元素节点<br>
             对于文本节点，<kbd>offset</kbd> 偏移的是字符数<br>
             对于元素节点则是子节点数
@@ -230,40 +238,49 @@
         <section>
           <h3>Range 的方法</h3>
 
+          <br>
+
           <p>其他：</p>
 
           <ul>
             <li>
-              <kbd>selectNode(node)</kbd> 设置范围以选择整个 <kbd>node</kbd>
+              <kbd>selectNode(node)</kbd>：设置范围以选择整个 <kbd>node</kbd>
             </li>
             <li>
-              <kbd>selectNodeContents(node)</kbd> 设置范围以选择整个 <kbd>node</kbd> 的内容
+              <kbd>selectNodeContents(node)</kbd>：设置范围以选择整个 <kbd>node</kbd> 的内容
             </li>
             <li>
-              <kbd>collapse(toStart)</kbd> 如果 <kbd>toStart=true</kbd> 则设置 end=start<br>否则设置 start=end，从而折叠范围
+              <kbd>collapse(toStart)</kbd>：如果 <kbd>toStart=true</kbd> 则设置 end=start<br>
+              否则设置 start=end，从而折叠范围
             </li>
             <li>
-              <kbd>cloneRange()</kbd> 创建一个具有相同起点/终点的新范围
+              <kbd>cloneRange()</kbd>：创建一个具有相同起点/终点的新范围
             </li>
           </ul>
+        </section>
+
+        <section>
+          <h3>Range 的方法</h3>
 
           <p>操纵范围内的内容：</p>
 
           <ul>
             <li>
-              <kbd>deleteContents()</kbd> 从文档中删除范围内容
+              <kbd>deleteContents()</kbd>：从文档中删除范围内容
             </li>
             <li>
-              <kbd>extractContents()</kbd> 从文档中删除范围内容，并将删除的内容作为 DocumentFragment 返回
+              <kbd>extractContents()</kbd>：从文档中删除范围内容，并将删除的内容作为 DocumentFragment 返回
             </li>
             <li>
-              <kbd>cloneContents()</kbd> 复制范围内容，并将复制的内容作为 DocumentFragment 返回
+              <kbd>cloneContents()</kbd>：复制范围内容，并将复制的内容作为 DocumentFragment 返回
             </li>
             <li>
-              <kbd>insertNode(node)</kbd> 在范围的起始处将 <kbd>node</kbd> 插入文档
+              <kbd>insertNode(node)</kbd>：在范围的起始处将 <kbd>node</kbd> 插入文档
             </li>
             <li>
-              <kbd>surroundContents(node)</kbd> 使用 <kbd>node</kbd> 将所选范围内容包裹起来。要使此操作有效<br>则该范围必须包含其中所有元素的开始和结束标签：不能像 <kbd>&lt;i>abc</kbd> 这样的部分范围
+              <kbd>surroundContents(node)</kbd>：使用 <kbd>node</kbd> 将所选范围内容包裹起来<br>
+              要使此操作有效则该范围必须包含其中所有元素的开始和结束标签<br>
+              不能像 <kbd>&lt;i>abc</kbd> 这样的部分范围
             </li>
           </ul>
 
@@ -283,12 +300,14 @@
             通过 <kbd>window.getSelection()</kbd> 来获取
           </p>
 
-          <p>理论上，一个选择可以包括零个或多个范围</p>
+          <p class="fragment">理论上，一个选择可以包括零个或多个范围</p>
 
-          <p>实际上，只有 Firefox 允许在文档中选择多个范围</p>
+          <div class="fragment">
+            <p>实际上，只有 Firefox 允许在文档中选择多个范围</p>
 
-          <div>
-            <img width="30%" data-src="images/selection-range/6.png">
+            <div>
+              <img width="30%" data-src="images/selection-range/6.png">
+            </div>
           </div>
         </section>
 
@@ -312,13 +331,15 @@
             <img width="40%" data-src="images/selection-range/7.png">
           </div>
 
-          <p>
-            如果是从 “italic” 的末尾开始选择到 “Example”<br>
-            则所选内容将被定向为 “backward”
-          </p>
+          <div class="fragment">
+            <p>
+              如果是从 “italic” 的末尾开始选择到 “Example”<br>
+              则所选内容将被定向为 “backward”
+            </p>
 
-          <div>
-            <img width="40%" data-src="images/selection-range/8.png">
+            <div>
+              <img width="40%" data-src="images/selection-range/8.png">
+            </div>
           </div>
         </section>
 
@@ -331,22 +352,22 @@
 
           <ul>
             <li>
-              <kbd>anchorNode</kbd> 选择的起始节点
+              <kbd>anchorNode</kbd>：选择的起始节点
             </li>
             <li>
-              <kbd>anchorOffset</kbd> 选择开始的 <kbd>anchorNode</kbd> 中的偏移量
+              <kbd>anchorOffset</kbd>：选择开始的 <kbd>anchorNode</kbd> 中的偏移量
             </li>
             <li>
-              <kbd>focusNode</kbd> 选择的结束节点
+              <kbd>focusNode</kbd>：选择的结束节点
             </li>
             <li>
-              <kbd>focusOffset</kbd> 选择开始处 <kbd>focusNode</kbd> 的偏移量
+              <kbd>focusOffset</kbd>：选择开始处 <kbd>focusNode</kbd> 的偏移量
             </li>
             <li>
-              <kbd>isCollapsed</kbd> 如果未选择任何内容（空范围）或不存在，则为 <kbd>true</kbd>
+              <kbd>isCollapsed</kbd>：如果未选择任何内容（空范围）或不存在，则为 <kbd>true</kbd>
             </li>
             <li>
-              <kbd>rangeCount</kbd> 选择中的范围数，除 Firefox 外，其他浏览器最多为 <kbd>1</kbd>
+              <kbd>rangeCount</kbd>：选择中的范围数，除 Firefox 外，其他浏览器最多为 <kbd>1</kbd>
             </li>
           </ul>
         </section>
@@ -360,12 +381,12 @@
 
           <ul>
             <li>
-              <kbd>elem.onselectstart</kbd> 当选择从 <kbd>elem</kbd> 上开始时<br>
+              <kbd>elem.onselectstart</kbd>：当选择从 <kbd>elem</kbd> 上开始时<br>
               例如，用户按下鼠标键并开始移动鼠标<br>
               阻止默认行为会使选择无法开始
             </li>
             <li>
-              <kbd>document.onselectionchange</kbd> 当选择变动时<br>
+              <kbd>document.onselectionchange</kbd>：当选择变动时<br>
               注意：此事件只能在 <kbd>document</kbd> 上监听
             </li>
           </ul>
@@ -403,22 +424,22 @@
 
           <ul>
             <li>
-              <kbd>getRangeAt(i)</kbd> 获取从 <kbd>0</kbd> 开始的第 i 个范围<br>
+              <kbd>getRangeAt(i)</kbd>：获取从 <kbd>0</kbd> 开始的第 i 个范围<br>
               在除 Firefox 之外的所有浏览器中，仅使用 <kbd>0</kbd>
             </li>
             <li>
-              <kbd>addRange(range)</kbd> 将 <kbd>range</kbd> 添加到选择中<br>
+              <kbd>addRange(range)</kbd>：将 <kbd>range</kbd> 添加到选择中<br>
               如果选择已有关联的范围<br>
               则除 Firefox 外的所有浏览器都将忽略该调用
             </li>
             <li>
-              <kbd>removeRange(range)</kbd> 从选择中删除 <kbd>range</kbd>
+              <kbd>removeRange(range)</kbd>：从选择中删除 <kbd>range</kbd>
             </li>
             <li>
-              <kbd>removeAllRanges()</kbd> 删除所有范围
+              <kbd>removeAllRanges()</kbd>：删除所有范围
             </li>
             <li>
-              <kbd>empty()</kbd> 是 <kbd>removeAllRanges</kbd> 的别名
+              <kbd>empty()</kbd>：<kbd>removeAllRanges</kbd> 的别名
             </li>
           </ul>
         </section>
@@ -426,7 +447,7 @@
         <section>
           <h3>Selection 方法</h3>
 
-          <p>还有一些方法可以直接操作选择范围，而无需使用 <kbd>Range</kbd>：</p>
+          <p style="font-size: 28px;">还有一些方法可以直接操作选择范围，而无需使用 <kbd>Range</kbd>：</p>
 
           <ul>
             <li>
@@ -461,7 +482,7 @@
             </li>
           </ul>
 
-          <p>
+          <p style="margin-top: 5px;">
             <a href="https://embed.plnkr.co/plunk/gl3xKjiYyW1kc93M" target="_blank">例子1</a>、
             <a href="https://embed.plnkr.co/plunk/ZzK6oT5rbmpePKky" target="_blank">例子2</a>
           </p>
@@ -473,8 +494,8 @@
           <br>
 
           <p>
-            如果选择已存在，则首先使用 <kbd>removeAllRanges()</kbd> 将其清空，然后添加范围<br>
-            否则，除 Firefox 外的所有浏览器都将忽略新范围
+            如果选择已存在，则首先使用 <kbd>removeAllRanges()</kbd> 将其清空，<br>
+            然后添加范围，否则除 Firefox 外的所有浏览器都将忽略新范围
           </p>
 
           <p>
@@ -485,9 +506,7 @@
         <section>
           <h3>总结</h3>
 
-          <p>今天主要介绍了 Selection 和 Range 对象</p>
-
-          <p>常用的方案是：</p>
+          <p>今天主要介绍了 Selection 和 Range 对象，常用的方案是：</p>
 
           <ol>
             <li>
