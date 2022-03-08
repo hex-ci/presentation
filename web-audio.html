@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Web Audio 基础与实例</title>
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/black.css" id="theme">
+    <link rel="stylesheet" href="css/default.css">
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+    <style>
+      kbd {
+        display: inline-block;
+        color: rgb(175, 175, 255);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section class="center">
+          <h2>Web Audio 基础与实例</h2>
+          <p class="sub">介绍 Web Audio 一个强大的音频处理系统</p>
+          <p>
+            <small><a href="https://codeigniter.org.cn" target="_blank">Hex</a> 为您分享 / Github: <a href="https://github.com/hex-ci" target="_blank">@hex-ci</a></small>
+          </p>
+        </section>
+
+        <section>
+          <h3>目录</h3>
+          <br>
+          <ul>
+            <li>Web Audio 是什么</li>
+            <li>音频上下文</li>
+            <li>音频源</li>
+            <li>音频处理</li>
+            <li>兼容性</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Web Audio 是什么</h3>
+
+          <br>
+
+          <p>
+            Web Audio 是一套在 Web 上处理音频的 API，使用这套 API 可以实现很多功能
+          </p>
+
+          <div class="fragment">
+            <p>
+              比如：音乐可视化、音色合成器、动态混音、声音特效、3D空间音频、均衡器、环境混响等
+            </p>
+          </div>
+
+          <div class="fragment">
+            <p>
+              可以应用在音乐播放器、电子音乐软件、游戏音效、音乐游戏、直播互动等领域
+            </p>
+          </div>
+        </section>
+
+        <section style="text-align: left;">
+          <h1>THE END</h1>
+          <p>谢谢！</p>
+          <p>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <small>
+              参考资料：
+              <ol>
+                <li><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Web_Audio_API" target="_blank">MDN Web Audio API 文档</a></li>
+                <li><a href="https://www.feishu.cn/docs/doccndPOo08N5Dmc53KJxjhcEsh" target="_blank">Web Audio 简易教程</a></li>
+              </ol>
+            </small>
+          </p>
+        </section>
+
+      </div>
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+
+    <script>
+      // More info https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: false,
+        width: '100%',
+        height: '100%',
+        // margin: 100,
+
+        transition: 'slide',
+
+        // More info https://github.com/hakimel/reveal.js#dependencies
+        dependencies: [
+          { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'plugin/zoom-js/zoom.js', async: true },
+          { src: 'plugin/notes/notes.js', async: true }
+        ]
+      });
+    </script>
+  </body>
+</html>
