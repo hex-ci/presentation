@@ -83,7 +83,7 @@
 
           <p>
             AudioContext 为音频处理提供一个上下文环境<br>
-            相当于一个中央控制器<br>
+            是一个中央控制器<br>
             控制着<kbd>音频路由图</kbd>中的各个音频模块
           </p>
 
@@ -99,25 +99,119 @@
         </section>
 
         <section>
-          <h3>音频节点 AudioNode</h3>
+          <h4>音频节点 AudioNode</h4>
 
           <br>
 
           <p>
-
+            音频节点是<kbd>音频路由图</kbd>中的基本单位<br>
+            音频节点通过它们的输入输出相互连接<br>
+            形成一个链或者一个简单的网
           </p>
+
+          <br>
+
+          <div class="fragment">
+            <p>
+              音频节点可以分为三类：<br>
+              <kbd>Source Node</kbd>：能产生音频的节点，只有输出，没有输入<br>
+              <kbd>Process Node</kbd>：对音频进行处理的节点，有输入和输出<br>
+              <kbd>Destination Node</kbd>：通常为音频播放设备，如扬声器
+            </p>
+          </div>
+        </section>
+
+        <section>
+          <h4>音频路由图</h4>
 
           <p>
-            音频源是音频节点的基类<br>
-            它是一个抽象类，不能直接创建<br>
-            它的子类包括：<br>
-            <kbd>音频输入节点</kbd>：音频输入节点是音频源的基类<br>
-            <kbd>音频输出节点</kbd>：音频输出节点是音频源的基类<br>
-            <kbd>音频节点</kbd>：音频节点是音频源的基类<br>
-            <kbd>音频控制节点</kbd>：音频控制节点是音频源的基类<br>
-            <kbd>音频输入节点</kbd>：音频输入节点是音频源的基类<br>
-            <kbd>音频输出节点</kbd>：音频输出节点是音
+            许多音频节点相互连接，构建了一个路由图，就是所谓的音频路由图
           </p>
+
+          <div>
+            <img style="max-height: 70vh" data-src="images/web-audio/1.jpg" alt="">
+          </div>
+        </section>
+
+        <section>
+          <h4>音频路由图</h4>
+
+          <p>
+            一个简单的音频播放示例：
+          </p>
+
+          <pre><code class="hljs js" data-trim>
+            const ac = new AudioContext()
+
+            const $audio = document.querySelector('#audio');
+            const sourceNode = ac.createMediaElementSource($audio); // 从 audio 标签创建一个音频源节点
+
+            const gainNode = ac.createGain(); // 创建一个增益节点
+            gainNode.gain.value = 0; // 将增益设置为 0（相当于音量设置为 0）
+
+            $audio.addEventListener('play', () => {
+              gainNode.gain.exponentialRampToValueAtTime(1, 1); // 在 1 秒的时间内指数增长到 1，实现一个播放渐入效果
+            });
+
+            sourceNode.connect(gainNode); // 音频源节点连接到增益节点
+            gainNode.connect(ac.destination); // 增益节点连接到 destination 进行播放
+          </code></pre>
+        </section>
+
+        <section>
+          <h3>音频源</h3>
+        </section>
+
+        <section>
+          <h4>从 &lt;audio&gt; 标签创建音频源</h4>
+        </section>
+
+        <section>
+          <h4>使用 HTTP 请求加载音频数据</h4>
+        </section>
+
+        <section>
+          <h4>使用内置振荡器产生声音</h4>
+        </section>
+
+        <section>
+          <h4>音频流</h4>
+        </section>
+
+        <section>
+          <h3>音频处理</h3>
+        </section>
+
+        <section>
+          <h4>Analyse</h4>
+        </section>
+
+        <section>
+          <h4>BiquadFilter</h4>
+        </section>
+
+        <section>
+          <h4>Panner</h4>
+        </section>
+
+        <section>
+          <h4>Convolver</h4>
+        </section>
+
+        <section>
+          <h3>兼容性</h3>
+        </section>
+
+        <section>
+          <h3>音频路由图</h3>
+
+          <iframe width="80%" height="500" src="https://codepen.io/_hex_/full/GRObBpx"></iframe>
+        </section>
+
+        <section>
+          <h3>音频路由图</h3>
+
+          <iframe width="80%" height="500" src="https://codepen.io/_hex_/full/NWwVrwP"></iframe>
         </section>
 
         <section style="text-align: left;">
