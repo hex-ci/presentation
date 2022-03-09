@@ -76,6 +76,50 @@
           </div>
         </section>
 
+        <section>
+          <h3>音频上下文 AudioContext</h3>
+
+          <br>
+
+          <p>
+            AudioContext 为音频处理提供一个上下文环境<br>
+            相当于一个中央控制器<br>
+            控制着<kbd>音频路由图</kbd>中的各个音频模块
+          </p>
+
+          <br>
+
+          <div class="fragment">
+            <p>
+              处理音频都需要创建一个 AudioContext 实例，可全局共享<br>
+              <kbd>音频节点</kbd>需要包含在 AudioContext 中<br>
+              每个<kbd>音频节点</kbd>只能关联一个 AudioContext
+            </p>
+          </div>
+        </section>
+
+        <section>
+          <h3>音频节点 AudioNode</h3>
+
+          <br>
+
+          <p>
+
+          </p>
+
+          <p>
+            音频源是音频节点的基类<br>
+            它是一个抽象类，不能直接创建<br>
+            它的子类包括：<br>
+            <kbd>音频输入节点</kbd>：音频输入节点是音频源的基类<br>
+            <kbd>音频输出节点</kbd>：音频输出节点是音频源的基类<br>
+            <kbd>音频节点</kbd>：音频节点是音频源的基类<br>
+            <kbd>音频控制节点</kbd>：音频控制节点是音频源的基类<br>
+            <kbd>音频输入节点</kbd>：音频输入节点是音频源的基类<br>
+            <kbd>音频输出节点</kbd>：音频输出节点是音
+          </p>
+        </section>
+
         <section style="text-align: left;">
           <h1>THE END</h1>
           <p>谢谢！</p>
