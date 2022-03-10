@@ -160,22 +160,145 @@
 
         <section>
           <h3>音频源</h3>
+          <p>
+            Web 中的音频源包括：
+          </p>
+          <ul>
+            <li>
+              audio DOM 节点
+            </li>
+            <li>
+              网络加载的音频文件
+            </li>
+            <li>
+              实时音频流（WebRTC、麦克风等）
+            </li>
+            <li>
+              能产生音频信号的音频节点（如：OscillatorNode）
+            </li>
+          </ul>
         </section>
 
         <section>
           <h4>从 &lt;audio&gt; 标签创建音频源</h4>
+
+          <p>
+            网络加载的音频文件，需要将其转换成音频源节点，才能连接到路由图中<br>
+            比如我们经常使用的 &lt;audio&gt; 标签，它是不能直接连接到其它音频节点的<br>
+            需要这样：
+          </p>
+
+          <pre><code class="hljs js" data-trim>
+            const ac = new AudioContext();
+
+            const $audio = document.querySelector('#audio');
+
+            // 从 &lt;audio&gt; 创建一个音频源节点
+            const sourceNode = ac.createMediaElementSource($audio);
+
+            sourceNode.connect(/* 其它音频节点 */);
+          </code></pre>
         </section>
 
         <section>
           <h4>使用 HTTP 请求加载音频数据</h4>
+
+          <p>
+            使用 HTTP 请求，将二进制的音频数据下载到本地后<br>
+            再创建一个音频源节点，例如这样：
+          </p>
+
+          <pre><code class="hljs js" data-trim>
+            const ac = new AudioContext();
+            const source = ac.createBufferSource();
+
+            source.connect(ac.destination);
+
+            fetch('xxx.mp3')
+              .then(res => res.arrayBuffer())
+              .then(async buffer => {
+                source.buffer = await ac.decodeAudioData(buffer);
+                source.start();
+              });
+          </code></pre>
+        </section>
+
+        <section>
+          <h4>制造白噪声</h4>
+
+          <p>
+            上面例子中，我们将解码后的数据（AudioBuffer）加载到了 source.buffer 属性中<br>
+            实际上，这里除了从网络/本地加载音频文件外，<br>
+            我们还可以自己创建一个 buffer 丢给 source.buffer 来制造一些声音<br>
+            比如下面的这个示例，使用随机函数生成一个白噪声音频：
+          </p>
+
+          <iframe width="80%" height="400" src="https://codepen.io/_hex_/full/zYPgZPR" title="example"></iframe>
         </section>
 
         <section>
           <h4>使用内置振荡器产生声音</h4>
+
+          <p>
+            OscillatorNode 是一个振荡器节点，它可以产生一个周期信号
+          </p>
+
+          <p>
+            他有四种基本类型：
+          </p>
+
+          <ul>
+            <li>
+              方波
+            </li>
+            <li>
+              正弦波
+            </li>
+            <li>
+              锯齿波
+            </li>
+            <li>
+              三角波
+            </li>
+          </ul>
+
+          <p>
+            例子：
+          </p>
+
+          <pre><code class="hljs js" data-trim>
+            const ac = new AudioContext();
+            const oscillator = ac.createOscillator();
+            oscillator.type = 'square';
+            oscillator.frequency.value = 440; // 不能直接给 frequency 赋值，可以设置其 value
+            oscillator.connect(ac.destination);
+            oscillator.start();
+          </code></pre>
+        </section>
+
+        <section>
+          <h4>使用内置振荡器产生声音</h4>
+
+          <p>演示：</p>
+
+          <iframe width="80%" height="500" src="https://codepen.io/_hex_/full/WNXVjrE" title="example"></iframe>
         </section>
 
         <section>
           <h4>音频流</h4>
+
+          <p>
+            音频流也可以用来创建一个音频源节点，常见的音频流由麦克风、WebRTC 产生<br>
+            通过 audioContext.createMediaStreamSource() 方法从音频流创建一个音频源节点
+          </p>
+
+          <p>
+            将其连接到前面的示波器组件，便可以做一个简单的录音可视化效果：
+          </p>
+
+          <br>
+
+          <a href="https://codepen.io/_hex_/full/OJOKgBr" target="_blank">查看示例</a>
         </section>
 
         <section>
@@ -205,13 +328,13 @@
         <section>
           <h3>音频路由图</h3>
 
-          <iframe width="80%" height="500" src="https://codepen.io/_hex_/full/GRObBpx"></iframe>
+          <iframe width="80%" height="500" src="https://codepen.io/_hex_/full/GRObBpx" title="example"></iframe>
         </section>
 
         <section>
           <h3>音频路由图</h3>
 
-          <iframe width="80%" height="500" src="https://codepen.io/_hex_/full/NWwVrwP"></iframe>
+          <iframe width="80%" height="500" src="https://codepen.io/_hex_/full/NWwVrwP" title="example"></iframe>
         </section>
 
         <section style="text-align: left;">
