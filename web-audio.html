@@ -60,12 +60,14 @@
           <br>
 
           <p>
-            Web Audio 是一套在 Web 上处理音频的 API，使用这套 API 可以实现很多功能
+            Web Audio 是一套在 Web 上处理音频的 API
           </p>
 
           <div class="fragment">
             <p>
-              比如：音乐可视化、音色合成器、动态混音、声音特效、3D空间音频、均衡器、环境混响等
+              使用这套 API 可以实现很多功能<br>
+              比如：音乐可视化、音色合成器、动态混音、声音特效、<br>
+              3D空间音频、均衡器、环境混响等
             </p>
           </div>
 
@@ -83,7 +85,7 @@
 
           <p>
             AudioContext 为音频处理提供一个上下文环境<br>
-            是一个中央控制器<br>
+            他也是一个中央控制器<br>
             控制着<kbd>音频路由图</kbd>中的各个音频模块
           </p>
 
@@ -303,38 +305,166 @@
 
         <section>
           <h3>音频处理</h3>
+
+          <br>
+
+          <p>介绍几个常用的音频分析处理相关的 API：</p>
+
+          <ul>
+            <li>AnalyseNode</li>
+            <li>BiquadFilterNode</li>
+            <li>ConvolverNode</li>
+          </ul>
         </section>
 
         <section>
-          <h4>Analyse</h4>
+          <h4>AnalyseNode</h4>
+
+          <p>
+            AnalyserNode 对音频信号进行实时的快速傅立叶变换（FFT）<br>
+            得到音频的时域/频域数据，用于实现时域分析、频域分析、音频可视化等
+          </p>
+
+          <p>
+            用法与示例：
+          </p>
+
+          <pre><code class="hljs js" data-trim>
+            const ac = new AudioContext();
+
+            // 创建一个 AnalyserNode
+            const analyser = ac.createAnalyser();
+
+            // fftSize 指定要进行 FFT 的采样数据的窗口大小，它的值必须是 2 的非零整数倍
+            analyser.fftSize = 2048;
+
+            // analyser.frequencyBinCount 是时域/频域数据的长度，它是 fftSize 的一半
+            // 因为实时音频信号的傅立叶变换具有对称性，只需要获取一半数据即可
+            const dataArray = new Uint8Array(analyser.frequencyBinCount);
+
+            // analyser.getByteTimeDomainData(dataArray) 方法将数据填充到 8 位无符号整型数组中
+            analyser.getByteTimeDomainData(dataArray);
+          </code></pre>
         </section>
 
         <section>
-          <h4>BiquadFilter</h4>
+          <h4>AnalyseNode</h4>
+
+          <p>
+            绘制一首音乐的波形：
+          </p>
+
+          <iframe width="80%" height="500" src="https://codepen.io/_hex_/full/NWwVrwP" title="example"></iframe>
         </section>
 
         <section>
-          <h4>Panner</h4>
-        </section>
+          <h4>AnalyseNode</h4>
 
-        <section>
-          <h4>Convolver</h4>
-        </section>
-
-        <section>
-          <h3>兼容性</h3>
-        </section>
-
-        <section>
-          <h3>音频路由图</h3>
+          <p>
+            简单的音乐播放动效：
+          </p>
 
           <iframe width="80%" height="500" src="https://codepen.io/_hex_/full/GRObBpx" title="example"></iframe>
         </section>
 
         <section>
-          <h3>音频路由图</h3>
+          <h4>BiquadFilterNode</h4>
 
-          <iframe width="80%" height="500" src="https://codepen.io/_hex_/full/NWwVrwP" title="example"></iframe>
+          <p>
+            BiquadFilterNode 是一个双二阶数字滤波器<br>
+            滤波器的作用是对特定频率的输入信号进行增强/减弱<br>
+            通常用来控制音调、做均衡器
+          </p>
+
+          <p>
+            用法与示例：
+          </p>
+
+          <pre><code class="hljs js" data-trim>
+            const ac = new AudioContext();
+
+            // 创建一个双二阶滤波器
+            const filter = ac.createBiquadFilter();
+
+            // 他有 4 个关键的参数：type, frequency, Q, gain
+            filter.type = 'peaking'; // 设置类型为峰值滤波器
+            filter.Q.value = 1; // 峰值滤波器的带宽
+            filter.frequency.value = 1000; // 中心频率
+            filter.gain.value = 5; // 增益，单位 db
+            // ...
+            source.connect(filter);
+            filter.connect(ac);
+          </code></pre>
+        </section>
+
+        <section>
+          <h4>BiquadFilterNode</h4>
+
+          <p>
+            均衡器演示：
+          </p>
+
+          <iframe width="80%" height="600" src="https://res.cdn.changbaimg.com/!/web-audio-demo/1.4/index.html#/biquad-filter" title="example" style="background-color: #fff;"></iframe>
+        </section>
+
+        <section>
+          <h4>BiquadFilterNode</h4>
+
+          <p>
+            所有的滤波器类型及对应的参数说明：
+          </p>
+
+          <div>
+            <img style="max-height: 70vh" data-src="images/web-audio/2.png" alt="">
+          </div>
+        </section>
+
+        <section>
+          <h4>ConvolverNode</h4>
+
+          <p>
+            ConvolverNode 对音频信号进行线性卷积运算<br>
+            将特定的脉冲信号与音频进行卷积运算后<br>
+            会获得畸变效果，可以用来做环境混响效果
+          </p>
+
+          <p>
+            用法与示例：
+          </p>
+
+          <pre><code class="hljs js" data-trim>
+            const ac = new AudioContext();
+
+            // 解码加载好的冲激信号
+            const impulse = ac.decodeAudioData(arrayBuffer);
+
+            // 创建一个卷积器节点
+            const convolver = ac.createConvolver();
+
+            // buffer: AudioBuffer 类型，一个冲激信号（必须是 .wav 格式的文件）
+            convolver.buffer = impulse;
+
+            source.connect(convolver);
+            convolver.connect(ac.destination);
+          </code></pre>
+        </section>
+
+        <section>
+          <h4>ConvolverNode</h4>
+
+          <p>
+            混响效果演示：
+          </p>
+
+          <iframe width="80%" height="500" src="https://res.cdn.changbaimg.com/!/web-audio-demo/1.4/index.html#/convolver" title="example" style="background-color: #fff;"></iframe>
+        </section>
+
+        <section>
+          <h3>兼容性</h3>
+
+          <div>
+            <img style="max-height: 70vh" data-src="images/web-audio/3.png" alt="">
+          </div>
         </section>
 
         <section style="text-align: left;">
