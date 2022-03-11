@@ -7,3 +7,4 @@
 * [登录表单最佳实践](https://hex-ci.github.io/presentation/sign-in-form-best-practices.html)
 * [Automan 可视化开发平台](https://hex-ci.github.io/presentation/automan.html)
 * [前端冷知识 Selection 和 Range](https://hex-ci.github.io/presentation/selection-range.html)
+* [Web Audio 基础与实例](https://hex-ci.github.io/presentation/web-audio.html)
