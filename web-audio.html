@@ -219,6 +219,7 @@
             fetch('xxx.mp3')
               .then(res => res.arrayBuffer())
               .then(async buffer => {
+                // 将解码后的数据（AudioBuffer）加载到了 source.buffer 属性中
                 source.buffer = await ac.decodeAudioData(buffer);
                 source.start();
               });
@@ -229,8 +230,7 @@
           <h4>制造白噪声</h4>
 
           <p>
-            上面例子中，我们将解码后的数据（AudioBuffer）加载到了 source.buffer 属性中<br>
-            实际上，这里除了从网络/本地加载音频文件外，<br>
+            除了从网络/本地加载音频文件外，<br>
             我们还可以自己创建一个 buffer 丢给 source.buffer 来制造一些声音<br>
             比如下面的这个示例，使用随机函数生成一个白噪声音频：
           </p>
@@ -251,16 +251,16 @@
 
           <ul>
             <li>
-              方波
+              方波 square
             </li>
             <li>
-              正弦波
+              正弦波 sine
             </li>
             <li>
-              锯齿波
+              锯齿波 sawtooth
             </li>
             <li>
-              三角波
+              三角波 triangle
             </li>
           </ul>
 
@@ -271,6 +271,7 @@
           <pre><code class="hljs js" data-trim>
             const ac = new AudioContext();
             const oscillator = ac.createOscillator();
+            // type 可能的值为 square, sine, sawtooth, triangle 默认为 sine
             oscillator.type = 'square';
             oscillator.frequency.value = 440; // 不能直接给 frequency 赋值，可以设置其 value
             oscillator.connect(ac.destination);
@@ -290,17 +291,22 @@
           <h4>音频流</h4>
 
           <p>
-            音频流也可以用来创建一个音频源节点，常见的音频流由麦克风、WebRTC 产生<br>
-            通过 audioContext.createMediaStreamSource() 方法从音频流创建一个音频源节点
+            使用音频流来创建一个音频源节点<br>
+            常见的音频流由麦克风、WebRTC 产生<br>
           </p>
 
-          <p>
-            将其连接到前面的示波器组件，便可以做一个简单的录音可视化效果：
-          </p>
+          <div class="fragment">
+            <p>
+              通过 ac.createMediaStreamSource() 方法<br>
+              从音频流创建一个音频源节点
+            </p>
 
-          <br>
+            <p>
+              下面是一个简单的录音可视化效果：
+            </p>
 
-          <a href="https://codepen.io/_hex_/full/OJOKgBr" target="_blank">查看示例</a>
+            <a href="https://codepen.io/_hex_/full/OJOKgBr" target="_blank">查看示例</a>
+          </div>
         </section>
 
         <section>
