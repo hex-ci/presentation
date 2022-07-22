@@ -5,6 +5,6 @@
 * [Vue.js 子组件的异步加载及其生命周期控制](vue-async-component.md)
 * [前端工程的昨天、今天和明天](https://hex-ci.github.io/presentation/web-history.html)
 * [登录表单最佳实践](https://hex-ci.github.io/presentation/sign-in-form-best-practices.html)
-* [Automan 可视化开发平台](https://hex-ci.github.io/presentation/automan.html)
-* [前端冷知识 Selection 和 Range](https://hex-ci.github.io/presentation/selection-range.html)
+* [Automan 可视化开发平台](https://hex-ci.github.io/presentation/automan.html) [视频](https://www.bilibili.com/video/BV1wg41137f8)
+* [前端冷知识 Selection 和 Range](https://hex-ci.github.io/presentation/selection-range.html) [视频](https://www.bilibili.com/video/BV1Qq4y1r7Zf)
 * [Web Audio 基础与实例](https://hex-ci.github.io/presentation/web-audio.html)
